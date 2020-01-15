@@ -4,7 +4,14 @@ https://developers.google.com/chart
 
 ## My charts
 
+### Templates
+
 - [Gantt chart](charts/templates/ganttchart.html)
+- [Area chart](charts/visualisations/EU28ElecRefSce2016.html)
+
+### Visualisations
+
+- [EU Reference Scenario electricity generation](charts/visualisations/EU28ElecRefSce2016.html)
 
 ## References
 

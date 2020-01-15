@@ -8,21 +8,34 @@ function drawChart() {
     var query = new google.visualization.Query(
         'https://docs.google.com/spreadsheets/d/1EyXVLmkQ2jIvdkSvimjWw0RpbofLuMhL7ynmxofqtco/gviz/tq?gid=0&headers=1'
     );
+
     query.send(function (response) {
         if (response.isError()) {
             console.log('Error in query: ' + response.getMessage() + ' ' +
             response.getDetailedMessage());
-        return;
+            return;
         }
         
         var options = {
             height: 830,
             width: 1634,
             gantt: {
-                labelStyle: { fontName: 'Arial', fontSize: 12.5 },
-                barHeight: 11, barCornerRadius: 3, trackHeight: 20,
-                innerGridDarkTrack: { fill: 'white' }, labelMaxWidth: 325,
-                arrow: { length: 5, radius: 10, spaceAfter: 0 }
+                barHeight: 11,
+                barCornerRadius: 3,
+                trackHeight: 20,
+                innerGridDarkTrack: {
+                    fill: 'white',
+                },
+                labelMaxWidth: 325,
+                arrow: {
+                    length: 5,
+                    radius: 10,
+                    spaceAfter: 0,
+                },
+                labelStyle: {
+                    fontName: "'Arial', sans-serif",
+                    fontSize: 12.5,
+                },
             },
         };
         

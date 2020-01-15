@@ -1,3 +1,5 @@
 # user files
 .vscode/
 *.code-workspace
+draft/
+archive/
