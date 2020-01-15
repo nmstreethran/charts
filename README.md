@@ -1,17 +1,16 @@
 # GoogleCharts
 
-## Gantt Chart
+https://developers.google.com/chart
 
-An [example Gantt chart](https://github.com/nmstreethran/GoogleCharts/blob/master/ganttchart.pdf) made using [Google Charts](https://developers.google.com/chart/interactive/docs/gallery/ganttchart) and [Google Sheets](https://docs.google.com/spreadsheets/d/1EyXVLmkQ2jIvdkSvimjWw0RpbofLuMhL7ynmxofqtco/).
+## My charts
 
-![Example Gantt chart](ganttchart.png "Example Gantt chart")
+- [Gantt chart](charts/templates/ganttchart.html)
 
-## Sources
+## References
 
-https://developers.google.com/chart/interactive/docs/spreadsheets
-
-https://stackoverflow.com/questions/42332424/how-can-i-use-google-charts-to-draw-a-gantt-chart-using-data-from-a-google-sheet
+1. https://developers.google.com/chart/interactive/docs/spreadsheets
+2. https://stackoverflow.com/questions/42332424/how-can-i-use-google-charts-to-draw-a-gantt-chart-using-data-from-a-google-sheet
 
 ## License
 
-Code samples are licensed under the [Apache 2.0 License](https://github.com/nmstreethran/GoogleCharts/blob/master/LICENSE).
+Code samples are licensed under the [Apache 2.0 License](LICENSE).

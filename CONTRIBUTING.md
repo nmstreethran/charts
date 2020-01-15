@@ -2,13 +2,11 @@
 
 Thank you for stopping by and considering contributing to this repository!
 
-This guideline was adapted from the [Open Science MOOC](https://github.com/OpenScienceMOOC/Module-5-Open-Research-Software-and-Open-Source/blob/master/CONTRIBUTING.md).
-
 **New to Git and GitHub?** See [these learning resources](https://help.github.com/articles/git-and-github-learning-resources/) and this [10 min. Git tutorial](https://try.github.io/levels/1/challenges/1).
 
 ## Contact me
 
-Please email me: nmstreethran@gmail.com
+Please email me (nmstreethran at gmail dot com) or open an issue.
 
 ## Reporting issues
 
