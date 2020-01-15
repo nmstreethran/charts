@@ -6,12 +6,11 @@ https://developers.google.com/chart
 
 ### Templates
 
+- [Area chart](charts/templates/areachart.html)
+- [Bar chart](charts/templates/barchart.html)
+- [Column chart](charts/templates/columnchart.html)
 - [Gantt chart](charts/templates/ganttchart.html)
-- [Area chart](charts/visualisations/EU28ElecRefSce2016.html)
-
-### Visualisations
-
-- [EU Reference Scenario electricity generation](charts/visualisations/EU28ElecRefSce2016.html)
+- [Pie chart](charts/templates/piechart.html)
 
 ## References
 

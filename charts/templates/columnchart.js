@@ -1,9 +1,9 @@
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawColColors);
 
-function drawChart() {
+function drawColColors() {
     var query = new google.visualization.Query(
-        'https://docs.google.com/spreadsheets/d/1CIkj1xhkPyo0LQEIZplKNGS7S6jmcM3MpDlTMghN23Q/gviz/tq?gid=0&headers=1'
+        'https://docs.google.com/spreadsheets/d/1CIkj1xhkPyo0LQEIZplKNGS7S6jmcM3MpDlTMghN23Q/gviz/tq?gid=1358745853&headers=1'
     );
 
     query.send(function (response) {
@@ -17,14 +17,16 @@ function drawChart() {
             titleTextStyle: {
                 fontName: "'Lato', 'Arial', sans-serif",
             },
-            title: 'Gross electricity generation by source in EU-28 from' +
-                ' 2000 to 2050 based on the 2016 reference scenario',
-            isStacked: 'percent',
-            width: 1000,
+            title: 'Baseline cost breakdown of electricity generation' +
+                ' technologies from the NREL-SEAC-2008 dataset',
+            colors: ['#9575cd', '#33ac71', '#f08080', '#f0e68c'],
             hAxis: {
-                title: 'Year',
+                title: 'Electricity generation technology',
+                viewWindow: {
+                    min: [7, 30, 0],
+                    max: [17, 30, 0],
+                },
                 titleTextStyle: {
-                    color: '#333',
                     fontName: "'Lato', 'Arial', sans-serif",
                 },
                 textStyle: {
@@ -32,25 +34,13 @@ function drawChart() {
                 },
             },
             vAxis: {
-                title: 'Gross electricity generation (GWh)',
-                minValue: 0,
+                title: 'Baseline cost breakdown (US$/MWh)',
                 titleTextStyle: {
                     fontName: "'Lato', 'Arial', sans-serif",
                 },
                 textStyle: {
                     fontName: "'Lato', 'Arial', sans-serif",
                 },
-            },
-            series: {
-                0: {color: 'blue'},
-                1: {color: 'orange'},
-                2: {color: 'grey'},
-                3: {color: 'yellow'},
-                4: {color: 'cyan'},
-                5: {color: 'green'},
-                6: {color: 'red'},
-                7: {color: 'brown'},
-                8: {color: 'black'},
             },
             legend: {
                 textStyle: {
@@ -64,7 +54,7 @@ function drawChart() {
             },
         };
 
-        var chart = new google.visualization.AreaChart(
+        var chart = new google.visualization.ColumnChart(
             document.getElementById('chart_div'));
         chart.draw(response.getDataTable(), options);
     });
