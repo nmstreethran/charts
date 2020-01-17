@@ -16,7 +16,7 @@ function drawColColors() {
         var options = {
             fontName: "'Lato', 'Arial', sans-serif",
             title: 'Energy emissions by subsector in Germany in 2012' +
-                ' (MtCO²ₑ)',
+                ' (MtCO²ₑ). Data: WRI CAIT.',
             colors: ['#9575cd', '#33ac71', '#f08080', '#f0e68c', '#66cdaa'],
             hAxis: {
                 title: 'Electricity generation technology',

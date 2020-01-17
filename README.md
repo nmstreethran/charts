@@ -1,8 +1,12 @@
 # GoogleCharts
 
+[![Build Status](https://travis-ci.com/nmstreethran/GoogleCharts.svg?branch=master)](https://travis-ci.com/nmstreethran/GoogleCharts)
+
 https://developers.google.com/chart
 
 ## My charts
+
+The charts can be viewed on [JSFiddle](https://jsfiddle.net/user/nmstreethran/).
 
 ### Templates
 
