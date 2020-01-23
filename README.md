@@ -1,10 +1,8 @@
-# GoogleCharts
+# Charts
 
-[![Build Status](https://travis-ci.com/nmstreethran/GoogleCharts.svg?branch=master)](https://travis-ci.com/nmstreethran/GoogleCharts)
+[![Markdown link checker GitHub issues](https://img.shields.io/github/issues/nmstreethran/GoogleCharts/link%20checker?color=limegreen&label=Link%20checker%20issues&labelColor=darkslategray)](https://github.com/nmstreethran/GoogleCharts/issues?q=is%3Aissue+is%3Aopen+label%3A%22link+checker%22)
 
 https://developers.google.com/chart
-
-## My charts
 
 The charts can be viewed on [JSFiddle](https://jsfiddle.net/user/nmstreethran/).
 
