@@ -1,12 +1,12 @@
 # Charts
 
-[![Markdown link checker GitHub issues](https://img.shields.io/github/issues/nmstreethran/GoogleCharts/link%20checker?color=limegreen&label=Link%20checker%20issues&labelColor=darkslategray)](https://github.com/nmstreethran/GoogleCharts/issues?q=is%3Aissue+is%3Aopen+label%3A%22link+checker%22)
+[![Markdown link checker GitHub issues](https://img.shields.io/github/issues/nmstreethran/charts/link%20checker?color=limegreen&label=Link%20checker%20issues&labelColor=darkslategray)](https://github.com/nmstreethran/charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22link+checker%22)
 
-https://developers.google.com/chart
+Made using [Google Charts](https://developers.google.com/chart)
 
 The charts can be viewed on [JSFiddle](https://jsfiddle.net/user/nmstreethran/).
 
-### Templates
+## Templates
 
 - [Area chart](charts/templates/areachart.html)
 - [Bar chart](charts/templates/barchart.html)
@@ -16,8 +16,8 @@ The charts can be viewed on [JSFiddle](https://jsfiddle.net/user/nmstreethran/).
 
 ## References
 
-1. https://developers.google.com/chart/interactive/docs/spreadsheets
-2. https://stackoverflow.com/questions/42332424/how-can-i-use-google-charts-to-draw-a-gantt-chart-using-data-from-a-google-sheet
+1. [Ingesting chart data from Google Sheets](https://developers.google.com/chart/interactive/docs/spreadsheets)
+2. <https://stackoverflow.com/questions/42332424/how-can-i-use-google-charts-to-draw-a-gantt-chart-using-data-from-a-google-sheet>
 
 ## License
 
