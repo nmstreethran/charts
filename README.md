@@ -14,6 +14,12 @@ The charts can be viewed on [JSFiddle](https://jsfiddle.net/user/nmstreethran/).
 - [Gantt chart](charts/google/ganttchart.html)
 - [Pie chart](charts/google/piechart.html)
 
+## Bokeh
+
+[Python interactive visualisation library](https://docs.bokeh.org/en/latest/index.html)
+
+- [Geo chart](charts/bokeh/geomap.html)
+
 ## References
 
 1. [Ingesting chart data from Google Sheets](https://developers.google.com/chart/interactive/docs/spreadsheets)
