@@ -20,8 +20,6 @@ data = pd.read_csv('data/stations.txt')
 
 # %%
 # transform latitudes and longitudes from wgs84 to web mercator projection
-xm = []
-ym = []
 lons = tuple(data['longitude'])
 lats = tuple(data['latitude'])
 wgs84 = Proj('epsg:26915')
@@ -33,9 +31,9 @@ data['mercator_y'] = ym
 
 # %%
 # generate unique colours for each state
-states = data['state'].values.tolist()
-palette = viridis(len(list(set(states))))
-color_map = models.CategoricalColorMapper(factors=list(set(states)),
+states = list(set(data['state'].values.tolist()))
+palette = viridis(len(states))
+color_map = models.CategoricalColorMapper(factors=states,
     palette=palette)
 
 # %%
@@ -46,7 +44,7 @@ geo_source = plotting.ColumnDataSource(data)
 # define map tooltips
 TOOLTIPS = [
     ('Station', '@name'), ('id', '@id'), ('Height', '@height'),
-    ('(Long, Lat)', '(@longitude, @latitude)')
+    ('(Lon, Lat)', '(@longitude, @latitude)')
 ]
 
 # %%
@@ -64,15 +62,17 @@ p.circle(source=geo_source, x='mercator_x', y='mercator_y',
     color={'field': 'state', 'transform': color_map})
 
 # %%
-# output the geomap and save the html file
-output_file('charts/bokeh/geomap2.html')
-save(p)
+# output the geomap
+# output_file('charts/bokeh/geomap2.html')
+# save(p)
 
 # %%
 # to export script and div components
 script, div = components(p)
+script = script.replace('<script type="text/javascript">', '')
+script = script.replace('</script>', '')
 
-with open('archive/geomap2_script.html', 'w') as f:
+with open('charts/bokeh/geomap2.js', 'w') as f:
     print(script, file=f)
-with open('archive/geomap2_div.html', 'w') as f:
+with open('charts/bokeh/geomap2.html', 'w') as f:
     print(div, file=f)

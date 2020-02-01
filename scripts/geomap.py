@@ -64,7 +64,7 @@ geo_source = ColumnDataSource(
 # %%
 # define map tooltips
 TOOLTIPS = [
-    ('Station', '@name'), ('id', '@id'), ('(Long, Lat)', '(@lons, @lats)')
+    ('Station', '@name'), ('id', '@id'), ('(Lon, Lat)', '(@lons, @lats)')
 ]
 
 # %%
@@ -82,14 +82,16 @@ p.circle(source=geo_source, x='x', y='y')
 
 # %%
 # output the geomap and save the html file
-output_file('charts/bokeh/geomap.html')
-save(p)
+# output_file('charts/bokeh/geomap.html')
+# save(p)
 
 # %%
 # to export script and div components
 script, div = components(p)
+script = script.replace('<script type="text/javascript">', '')
+script = script.replace('</script>', '')
 
-with open('archive/geomap_script.html', 'w') as f:
+with open('charts/bokeh/geomap.js', 'w') as f:
     print(script, file=f)
-with open('archive/geomap_div.html', 'w') as f:
+with open('charts/bokeh/geomap.html', 'w') as f:
     print(div, file=f)
