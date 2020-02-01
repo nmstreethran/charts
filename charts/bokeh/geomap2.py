@@ -20,16 +20,16 @@ data = pd.read_csv('data/stations.txt')
 
 # %%
 # transform latitudes and longitudes from wgs84 to web mercator projection
-lons_m = []
-lats_m = []
+xm = []
+ym = []
 lons = tuple(data['longitude'])
 lats = tuple(data['latitude'])
 wgs84 = Proj('epsg:26915')
 web = Proj('epsg:3857')
 lons, lats = wgs84(lons, lats)
-lons_m, lats_m = transform(wgs84, web, lons, lats)
-data['longitude_m'] = lons_m
-data['latitude_m'] = lats_m
+xm, ym = transform(wgs84, web, lons, lats)
+data['mercator_x'] = xm
+data['mercator_y'] = ym
 
 # %%
 # generate unique colours for each state
@@ -60,7 +60,7 @@ p = plotting.figure(title='German Meteorological Stations. Data: dwd.de.',
 p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 
 # add data points
-p.circle(source=geo_source, x='longitude_m', y='latitude_m',
+p.circle(source=geo_source, x='mercator_x', y='mercator_y',
     color={'field': 'state', 'transform': color_map})
 
 # %%

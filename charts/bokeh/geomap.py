@@ -45,26 +45,26 @@ for feature in data['features']:
 # transform latitudes and longitudes from wgs84 to web mercator projection
 wgs84 = Proj('epsg:26915')
 web = Proj('epsg:3857')
-lons, lats = wgs84(lons, lats)
-lon, lat = transform(wgs84, web, lons, lats)
+lon, lat = wgs84(lons, lats)
+xm, ym = transform(wgs84, web, lon, lat)
 
 # %%
 # create dictionary of source data for geo map
 geo_source = ColumnDataSource(
     {
-        'x': lon,
-        'y': lat,
+        'x': xm,
+        'y': ym,
         'name': names,
         'id': ids,
-        'lat': lats,
-        'lon': lons,
+        'lats': lats,
+        'lons': lons,
         }
     )
 
 # %%
 # define map tooltips
 TOOLTIPS = [
-    ('Station', '@name'), ('id', '@id'), ('(Long, Lat)', '(@lon, @lat)')
+    ('Station', '@name'), ('id', '@id'), ('(Long, Lat)', '(@lons, @lats)')
 ]
 
 # %%
