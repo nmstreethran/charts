@@ -4,6 +4,7 @@ from bokeh.plotting import figure
 from bokeh.tile_providers import get_provider, Vendors
 from bokeh.io import output_file, save
 from bokeh.models import ColumnDataSource
+from bokeh.embed import components
 from pyproj import Proj, transform
 import json
 import os
@@ -13,7 +14,7 @@ import os
 # warning! this step utilises the dwdweather2 library (python 2)
 # installation: pip install dwdweather2
 # https://pypi.org/project/dwdweather2/
-os.system('dwdweather stations --type geojson > data/stations.geojson')
+# os.system('dwdweather stations --type geojson > data/stations.geojson')
 
 # %%
 # load the data
@@ -34,24 +35,25 @@ names = []
 for feature in data['features']:
     for idx, coord in enumerate(feature['geometry']['coordinates']):
         if idx == 0:
-            lats.append(coord)
-        else:
             lons.append(coord)
+        else:
+            lats.append(coord)
     ids.append(feature['properties']['id'])
     names.append(feature['properties']['name'])
 
 # %%
 # transform latitudes and longitudes from wgs84 to web mercator projection
-wgs84 = Proj('epsg:4326')
+wgs84 = Proj('epsg:26915')
 web = Proj('epsg:3857')
-lat, lon = transform(wgs84, web, lons, lats)
+lons, lats = wgs84(lons, lats)
+lon, lat = transform(wgs84, web, lons, lats)
 
 # %%
 # create dictionary of source data for geo map
 geo_source = ColumnDataSource(
     {
-        'x': lat,
-        'y': lon,
+        'x': lon,
+        'y': lat,
         'name': names,
         'id': ids,
         'lat': lats,
@@ -82,3 +84,12 @@ p.circle(source=geo_source, x='x', y='y')
 # output the geomap and save the html file
 output_file('charts/bokeh/geomap.html')
 save(p)
+
+# %%
+# to export script and div components
+script, div = components(p)
+
+with open('archive/geomap_script.html', 'w') as f:
+    print(script, file=f)
+with open('archive/geomap_div.html', 'w') as f:
+    print(div, file=f)
