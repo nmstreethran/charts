@@ -1,6 +1,7 @@
 # %%
 # import libraries
-from bokeh import plotting, models
+from bokeh.models import ColumnDataSource, CategoricalColorMapper
+from bokeh.plotting import figure
 from bokeh.tile_providers import get_provider, Vendors
 from bokeh.io import output_file, save
 from bokeh.embed import components
@@ -31,14 +32,14 @@ data['mercator_y'] = ym
 
 # %%
 # generate unique colours for each state
-states = list(set(data['state'].values.tolist()))
+states = list(set(data['state']))
 palette = viridis(len(states))
-color_map = models.CategoricalColorMapper(factors=states,
+color_map = CategoricalColorMapper(factors=states,
     palette=palette)
 
 # %%
 # create dictionary of source data for geo map
-geo_source = plotting.ColumnDataSource(data)
+geo_source = ColumnDataSource(data)
 
 # %%
 # define map tooltips
@@ -51,7 +52,7 @@ TOOLTIPS = [
 # set figure title, tooltips and axis types
 # set axis types to mercator so that latitudes and longitudes are used
 # in the figure
-p = plotting.figure(title='German Meteorological Stations. Data: dwd.de.',
+p = figure(title='German Meteorological Stations. Data: dwd.de.',
     x_axis_type='mercator', y_axis_type='mercator', tooltips=TOOLTIPS)
 
 # set openstreetmaps overlay
