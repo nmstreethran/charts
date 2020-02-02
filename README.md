@@ -18,8 +18,8 @@
 
 [Python interactive visualisation library](https://docs.bokeh.org/en/latest/index.html)
 
-- [Geo chart using geojson data](charts/bokeh/geomap.html) [[JSFiddle](https://jsfiddle.net/nithiya/Lj7fxs4k/)]
-- [Geo chart using csv data](charts/bokeh/geomap2.html) [[JSFiddle](https://jsfiddle.net/nithiya/7rwo1z59/)]
+- [Geo chart using geojson data](charts/bokeh/geomap-geojson.html) [[JSFiddle](https://jsfiddle.net/nithiya/Lj7fxs4k/)]
+- [Geo chart using csv data](charts/bokeh/geomap.html) [[JSFiddle](https://jsfiddle.net/nithiya/7rwo1z59/)]
 
 ## References
 

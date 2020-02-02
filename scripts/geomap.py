@@ -1,89 +1,70 @@
 # %%
 # import libraries
-from bokeh.plotting import figure
+from bokeh import plotting, models
 from bokeh.tile_providers import get_provider, Vendors
 from bokeh.io import output_file, save
-from bokeh.models import ColumnDataSource
 from bokeh.embed import components
+from bokeh.palettes import viridis
 from pyproj import Proj, transform
-import json
+import pandas as pd
 import os
 
 # %%
-# download weather station geojson data from german meteorological service
-# warning! this step utilises the dwdweather2 library (python 2)
-# installation: pip install dwdweather2
-# https://pypi.org/project/dwdweather2/
-# os.system('dwdweather stations --type geojson > data/stations.geojson')
+# download weather station data from german meteorological service
+# os.system('python scripts/dwd_stations.py')
 
 # %%
 # load the data
 # german meteorological stations
-with open('data/stations.geojson') as src:
-    data = json.load(src)
-
-# %%
-# create empty lists to store data
-# latitudes, longitudes, station ids and station names
-lats = []
-lons = []
-ids = []
-names = []
-
-# %%
-# extract geojson data and input into lists
-for feature in data['features']:
-    for idx, coord in enumerate(feature['geometry']['coordinates']):
-        if idx == 0:
-            lons.append(coord)
-        else:
-            lats.append(coord)
-    ids.append(feature['properties']['id'])
-    names.append(feature['properties']['name'])
+data = pd.read_csv('data/stations.txt')
 
 # %%
 # transform latitudes and longitudes from wgs84 to web mercator projection
+lons = tuple(data['longitude'])
+lats = tuple(data['latitude'])
 wgs84 = Proj('epsg:26915')
 web = Proj('epsg:3857')
-lon, lat = wgs84(lons, lats)
-xm, ym = transform(wgs84, web, lon, lat)
+lons, lats = wgs84(lons, lats)
+xm, ym = transform(wgs84, web, lons, lats)
+data['mercator_x'] = xm
+data['mercator_y'] = ym
+
+# %%
+# generate unique colours for each state
+states = list(set(data['state'].values.tolist()))
+palette = viridis(len(states))
+color_map = models.CategoricalColorMapper(factors=states,
+    palette=palette)
 
 # %%
 # create dictionary of source data for geo map
-geo_source = ColumnDataSource(
-    {
-        'x': xm,
-        'y': ym,
-        'name': names,
-        'id': ids,
-        'lats': lats,
-        'lons': lons,
-        }
-    )
+geo_source = plotting.ColumnDataSource(data)
 
 # %%
 # define map tooltips
 TOOLTIPS = [
-    ('Station', '@name'), ('id', '@id'), ('(Lon, Lat)', '(@lons, @lats)')
+    ('Station', '@name'), ('id', '@id'), ('Height', '@height'),
+    ('State', '@state'), ('(Lon, Lat)', '(@longitude, @latitude)')
 ]
 
 # %%
 # set figure title, tooltips and axis types
 # set axis types to mercator so that latitudes and longitudes are used
 # in the figure
-p = figure(title='German Meteorological Stations. Data: dwd.de.',
+p = plotting.figure(title='German Meteorological Stations. Data: dwd.de.',
     x_axis_type='mercator', y_axis_type='mercator', tooltips=TOOLTIPS)
 
 # set openstreetmaps overlay
 p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 
 # add data points
-p.circle(source=geo_source, x='x', y='y')
+p.circle(source=geo_source, x='mercator_x', y='mercator_y',
+    color={'field': 'state', 'transform': color_map})
 
 # %%
-# output the geomap and save the html file
-# output_file('charts/bokeh/geomap.html')
-# save(p)
+# output the geomap
+output_file('archive/geomap.html')
+save(p)
 
 # %%
 # to export script and div components
@@ -93,5 +74,5 @@ script = script.replace('</script>', '')
 
 with open('charts/bokeh/geomap.js', 'w') as f:
     print(script, file=f)
-with open('charts/bokeh/geomap.html', 'w') as f:
-    print(div, file=f)
+with open('charts/bokeh/geomap-div.js', 'w') as f:
+    print('document.write(`' + div + '\n`);', file=f)
