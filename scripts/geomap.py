@@ -22,7 +22,7 @@ data = pd.read_csv('data/stations.txt')
 # transform latitudes and longitudes from wgs84 to web mercator projection
 lons = tuple(data['longitude'])
 lats = tuple(data['latitude'])
-wgs84 = Proj('epsg:26915')
+wgs84 = Proj('epsg:5243')
 web = Proj('epsg:3857')
 lons, lats = wgs84(lons, lats)
 xm, ym = transform(wgs84, web, lons, lats)
