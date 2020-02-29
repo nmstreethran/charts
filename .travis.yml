@@ -1,0 +1,14 @@
+# Link checking
+# https://github.com/dkhamsing/awesome_bot
+
+os: linux
+
+language: ruby
+
+rvm: 2.7.0
+
+before_script:
+  - gem install awesome_bot
+
+script:
+  - awesome_bot --allow-dupe --allow-redirect --skip-save-results `find . -name "*.md"` ; awesome_bot --allow-dupe --allow-redirect --skip-save-results --base-url https://github.com/nmstreethran/charts/blob/master/ README.md

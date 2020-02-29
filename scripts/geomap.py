@@ -70,10 +70,16 @@ save(p)
 # %%
 # to export script and div components
 script, div = components(p)
+# remove script html tags to save as js file
 script = script.replace('<script type="text/javascript">', '')
 script = script.replace('</script>', '')
 
+# export script as js file
 with open('charts/bokeh/geomap.js', 'w') as f:
     print(script, file=f)
+# export div as html file
+with open('charts/bokeh/geomap-div.html', 'w') as f:
+    print(div, file=f)
+# export div as js file (so that it can be read by geomap.html)
 with open('charts/bokeh/geomap-div.js', 'w') as f:
     print('document.write(`' + div + '\n`);', file=f)

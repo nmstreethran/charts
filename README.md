@@ -1,8 +1,8 @@
 # Charts
 
-[![License: Apache](https://img.shields.io/badge/License-Apache-yellow.svg?labelColor=darkslategray)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![JSFiddle](https://img.shields.io/badge/-View%20on%20JSFiddle-purple.svg?logo=jsfiddle&labelColor=black&logoColor=white)](https://jsfiddle.net/user/nithiya)
-[![Markdown link checker GitHub issues](https://img.shields.io/github/issues/nmstreethran/charts/link%20checker?color=limegreen&label=Link%20checker%20issues&labelColor=darkslategray)](https://github.com/nmstreethran/charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22link+checker%22)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-yellow.svg?labelColor=darkslategray)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![JSFiddle](https://img.shields.io/badge/-View%20on%20JSFiddle-darkslategray.svg?logo=jsfiddle&labelColor=blue&logoColor=white)](https://jsfiddle.net/user/nithiya)
+[![Build Status](https://travis-ci.org/nmstreethran/charts.svg?branch=master)](https://travis-ci.org/nmstreethran/charts)
 
 ## Google Charts
 
