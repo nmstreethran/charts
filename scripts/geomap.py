@@ -1,4 +1,3 @@
-# %%
 # import libraries
 from bokeh.models import ColumnDataSource, CategoricalColorMapper
 from bokeh.plotting import figure
@@ -10,45 +9,41 @@ from pyproj import Proj, transform
 import pandas as pd
 import os
 
-# %%
 # download weather station data from german meteorological service
-# os.system('python scripts/dwd_stations.py')
+# warning! this step utilises the dwdweather2 library (python 2)
+# installation: pip install dwdweather2
+# https://pypi.org/project/dwdweather2/
+# os.system('dwdweather stations --type csv > data/stations.txt')
 
-# %%
 # load the data
 # german meteorological stations
 data = pd.read_csv('data/stations.txt')
 
-# %%
 # transform latitudes and longitudes from wgs84 to web mercator projection
 lons = tuple(data['longitude'])
 lats = tuple(data['latitude'])
-wgs84 = Proj('epsg:5243')
-web = Proj('epsg:3857')
+wgs84 = Proj(init='epsg:5243')
+web = Proj(init='epsg:3857')
 lons, lats = wgs84(lons, lats)
 xm, ym = transform(wgs84, web, lons, lats)
 data['mercator_x'] = xm
 data['mercator_y'] = ym
 
-# %%
 # generate unique colours for each state
 states = list(set(data['state']))
 palette = viridis(len(states))
 color_map = CategoricalColorMapper(factors=states,
     palette=palette)
 
-# %%
 # create dictionary of source data for geo map
 geo_source = ColumnDataSource(data)
 
-# %%
 # define map tooltips
 TOOLTIPS = [
     ('Station', '@name'), ('id', '@id'), ('Height', '@height'),
     ('State', '@state'), ('(Lon, Lat)', '(@longitude, @latitude)')
 ]
 
-# %%
 # set figure title, tooltips and axis types
 # set axis types to mercator so that latitudes and longitudes are used
 # in the figure
@@ -62,12 +57,10 @@ p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 p.circle(source=geo_source, x='mercator_x', y='mercator_y',
     color={'field': 'state', 'transform': color_map})
 
-# %%
 # output the geomap
 output_file('archive/geomap.html')
 save(p)
 
-# %%
 # to export script and div components
 script, div = components(p)
 # remove script html tags to save as js file

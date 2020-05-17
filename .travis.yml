@@ -11,4 +11,4 @@ before_script:
   - gem install awesome_bot
 
 script:
-  - awesome_bot --allow-dupe --allow-redirect --skip-save-results `find . -name "*.md"` ; awesome_bot --allow-dupe --allow-redirect --skip-save-results --base-url https://github.com/nmstreethran/charts/blob/master/ README.md
+  - awesome_bot --allow-dupe --skip-save-results --base-url https://github.com/nmstreethran/charts/blob/master/ --white-list travis-ci.org `find . -name "*.md"`
