@@ -2,7 +2,7 @@
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-yellow.svg?labelColor=darkslategray)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![JSFiddle](https://img.shields.io/badge/-View%20on%20JSFiddle-darkslategray.svg?logo=jsfiddle&labelColor=blue&logoColor=white)](https://jsfiddle.net/user/nithiya)
-[![Build Status](https://travis-ci.org/nmstreethran/charts.svg?branch=master)](https://travis-ci.org/nmstreethran/charts)
+[![Action: links](https://github.com/nmstreethran/charts/workflows/links/badge.svg)](https://github.com/nmstreethran/charts/actions?query=workflow%3Alinks)
 
 ## Google Charts
 
