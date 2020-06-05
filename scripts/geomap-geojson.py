@@ -1,22 +1,24 @@
 # import libraries
 from bokeh.plotting import figure
 from bokeh.tile_providers import get_provider, Vendors
-from bokeh.io import output_file, save
+from bokeh.io import output_file, save, show
 from bokeh.models import ColumnDataSource
 from bokeh.embed import components
-from pyproj import Proj, transform
+from pyproj import Transformer
 import json
-import os
 
 # download weather station geojson data from german meteorological service
 # warning! this step utilises the dwdweather2 library (python 2)
-# installation: pip install dwdweather2
 # https://pypi.org/project/dwdweather2/
-# os.system('dwdweather stations --type geojson > data/stations.geojson')
+# create and activate new virtual environment for this library alone
+# # ... and then install dwdweather2 (recommended)
+# pip install dwdweather2
+# # download GeoJSON
+# dwdweather stations --type geojson > dwd_stations.geojson
 
 # load the data
 # german meteorological stations
-with open('data/stations.geojson') as src:
+with open('data/dwd_stations.geojson') as src:
     data = json.load(src)
 
 # create empty lists to store data
@@ -37,10 +39,9 @@ for feature in data['features']:
     names.append(feature['properties']['name'])
 
 # transform latitudes and longitudes from wgs84 to web mercator projection
-wgs84 = Proj(init='epsg:5243')
-web = Proj(init='epsg:3857')
-lon, lat = wgs84(lons, lats)
-xm, ym = transform(wgs84, web, lon, lat)
+transformer = Transformer.from_crs(
+    'epsg:4326', 'epsg:3857', always_xy=True)
+xm, ym = transformer.transform(lons, lats)
 
 # create dictionary of source data for geo map
 geo_source = ColumnDataSource(
@@ -71,9 +72,11 @@ p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 # add data points
 p.circle(source=geo_source, x='x', y='y')
 
-# output the geomap and save the html file
-# output_file('archive/geomap.html')
-# save(p)
+# output the geomap and save to a custom path
+output_file('archive/geomap.html')
+save(p)
+# open the map
+show(p)
 
 # to export script and div components
 script, div = components(p)

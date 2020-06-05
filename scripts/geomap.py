@@ -2,30 +2,31 @@
 from bokeh.models import ColumnDataSource, CategoricalColorMapper
 from bokeh.plotting import figure
 from bokeh.tile_providers import get_provider, Vendors
-from bokeh.io import output_file, save
+from bokeh.io import output_file, save, show
 from bokeh.embed import components
 from bokeh.palettes import viridis
-from pyproj import Proj, transform
+from pyproj import Transformer
 import pandas as pd
-import os
 
-# download weather station data from german meteorological service
+# download weather station geojson data from german meteorological service
 # warning! this step utilises the dwdweather2 library (python 2)
-# installation: pip install dwdweather2
 # https://pypi.org/project/dwdweather2/
-# os.system('dwdweather stations --type csv > data/stations.txt')
+# create and activate new virtual environment for this library alone
+# # ... and then install dwdweather2 (recommended)
+# pip install dwdweather2
+# # download CSV
+# dwdweather stations --type csv > dwd_stations.csv
 
 # load the data
 # german meteorological stations
-data = pd.read_csv('data/stations.txt')
+data = pd.read_csv('data/dwd_stations.txt')
 
 # transform latitudes and longitudes from wgs84 to web mercator projection
 lons = tuple(data['longitude'])
 lats = tuple(data['latitude'])
-wgs84 = Proj(init='epsg:5243')
-web = Proj(init='epsg:3857')
-lons, lats = wgs84(lons, lats)
-xm, ym = transform(wgs84, web, lons, lats)
+transformer = Transformer.from_crs(
+    'epsg:4326', 'epsg:3857', always_xy=True)
+xm, ym = transformer.transform(lons, lats)
 data['mercator_x'] = xm
 data['mercator_y'] = ym
 
@@ -57,9 +58,11 @@ p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 p.circle(source=geo_source, x='mercator_x', y='mercator_y',
     color={'field': 'state', 'transform': color_map})
 
-# output the geomap
+# output the geomap and save to a custom path
 output_file('archive/geomap.html')
 save(p)
+# open the map
+show(p)
 
 # to export script and div components
 script, div = components(p)
