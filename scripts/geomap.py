@@ -2,23 +2,27 @@
 from bokeh.models import ColumnDataSource, CategoricalColorMapper
 from bokeh.plotting import figure
 from bokeh.tile_providers import get_provider, Vendors
-from bokeh.io import output_file, save, show
+from bokeh.io import output_file, show
 from bokeh.embed import components
 from bokeh.palettes import viridis
 from pyproj import Transformer
 import pandas as pd
 
-# download weather station geojson data from german meteorological service
-# warning! this step utilises the dwdweather2 library (python 2)
+"""
+
+# download weather station CSV data from German meteorological service
+# Warning! this step utilises the dwdweather2 library (Python 2)
 # https://pypi.org/project/dwdweather2/
 # create and activate new virtual environment for this library alone
-# # ... and then install dwdweather2 (recommended)
-# pip install dwdweather2
-# # download CSV
-# dwdweather stations --type csv > dwd_stations.csv
+# ... and then install dwdweather2 (recommended)
+pip install dwdweather2
+
+# download CSV
+dwdweather stations --type csv > dwd_stations.csv
+"""
 
 # load the data
-# german meteorological stations
+# German meteorological stations
 data = pd.read_csv('data/dwd_stations.txt')
 
 # transform latitudes and longitudes from wgs84 to web mercator projection
@@ -51,31 +55,30 @@ TOOLTIPS = [
 p = figure(title='German Meteorological Stations. Data: dwd.de.',
     x_axis_type='mercator', y_axis_type='mercator', tooltips=TOOLTIPS)
 
-# set openstreetmaps overlay
+# set OpenStreetMap overlay
 p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 
 # add data points
 p.circle(source=geo_source, x='mercator_x', y='mercator_y',
     color={'field': 'state', 'transform': color_map})
 
-# output the geomap and save to a custom path
+# output the geo map and save to a custom path
 output_file('archive/geomap.html')
-save(p)
 # open the map
 show(p)
 
 # to export script and div components
 script, div = components(p)
-# remove script html tags to save as js file
+# remove script HTML tags to save as JavaScript file
 script = script.replace('<script type="text/javascript">', '')
 script = script.replace('</script>', '')
 
-# export script as js file
+# export script as JavaScript file
 with open('charts/bokeh/geomap.js', 'w') as f:
     print(script, file=f)
-# export div as html file
+# export div as HTML file
 with open('charts/bokeh/geomap-div.html', 'w') as f:
     print(div, file=f)
-# export div as js file (so that it can be read by geomap.html)
+# export div as JavaScript file (so that it can be read by geomap.html)
 with open('charts/bokeh/geomap-div.js', 'w') as f:
     print('document.write(`' + div + '\n`);', file=f)

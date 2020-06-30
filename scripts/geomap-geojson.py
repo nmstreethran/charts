@@ -1,23 +1,27 @@
 # import libraries
 from bokeh.plotting import figure
 from bokeh.tile_providers import get_provider, Vendors
-from bokeh.io import output_file, save, show
+from bokeh.io import output_file, show
 from bokeh.models import ColumnDataSource
 from bokeh.embed import components
 from pyproj import Transformer
 import json
 
-# download weather station geojson data from german meteorological service
-# warning! this step utilises the dwdweather2 library (python 2)
+"""
+
+# download weather station GeoJSON data from German meteorological service
+# warning! this step utilises the dwdweather2 library (Python 2)
 # https://pypi.org/project/dwdweather2/
 # create and activate new virtual environment for this library alone
-# # ... and then install dwdweather2 (recommended)
-# pip install dwdweather2
-# # download GeoJSON
-# dwdweather stations --type geojson > dwd_stations.geojson
+# ... and then install dwdweather2 (recommended)
+pip install dwdweather2
+
+# download GeoJSON
+dwdweather stations --type geojson > dwd_stations.geojson
+"""
 
 # load the data
-# german meteorological stations
+# German meteorological stations
 with open('data/dwd_stations.geojson') as src:
     data = json.load(src)
 
@@ -28,7 +32,7 @@ lons = []
 ids = []
 names = []
 
-# extract geojson data and input into lists
+# extract GeoJSON data and input into lists
 for feature in data['features']:
     for idx, coord in enumerate(feature['geometry']['coordinates']):
         if idx == 0:
@@ -38,7 +42,7 @@ for feature in data['features']:
     ids.append(feature['properties']['id'])
     names.append(feature['properties']['name'])
 
-# transform latitudes and longitudes from wgs84 to web mercator projection
+# transform latitudes and longitudes from wgs84 to Web Mercator projection
 transformer = Transformer.from_crs(
     'epsg:4326', 'epsg:3857', always_xy=True)
 xm, ym = transformer.transform(lons, lats)
@@ -66,30 +70,30 @@ TOOLTIPS = [
 p = figure(title='German Meteorological Stations. Data: dwd.de.',
     x_axis_type='mercator', y_axis_type='mercator', tooltips=TOOLTIPS)
 
-# set openstreetmaps overlay
+# set OpenStreetMap overlay
 p.add_tile(get_provider(Vendors.CARTODBPOSITRON_RETINA))
 
 # add data points
 p.circle(source=geo_source, x='x', y='y')
 
-# output the geomap and save to a custom path
+# output the geo map and save to a custom path
 output_file('archive/geomap.html')
-save(p)
 # open the map
 show(p)
 
 # to export script and div components
 script, div = components(p)
-# remove script html tags to save as js file
+# remove script HTML tags to save as JavaScript file
 script = script.replace('<script type="text/javascript">', '')
 script = script.replace('</script>', '')
 
-# export script as js file
+# export script as JavaScript file
 with open('charts/bokeh/geomap-geojson.js', 'w') as f:
     print(script, file=f)
-# export div as html file
+# export div as HTML file
 with open('charts/bokeh/geomap-geojson-div.html', 'w') as f:
     print(div, file=f)
-# export div as js file (so that it can be read by geomap-geojson.html)
+# export div as JavaScript file
+# (so that it can be read by geomap-geojson.html)
 with open('charts/bokeh/geomap-geojson-div.js', 'w') as f:
     print('document.write(`' + div + '\n`);', file=f)
