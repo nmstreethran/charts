@@ -1,25 +1,23 @@
 # Charts
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-yellow.svg?labelColor=darkslategray)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![JSFiddle](https://img.shields.io/badge/-View%20on%20JSFiddle-darkslategray.svg?logo=jsfiddle&labelColor=blue&logoColor=white)](https://jsfiddle.net/user/nithiya)
-[![Action: links](https://github.com/nmstreethran/charts/workflows/links/badge.svg)](https://github.com/nmstreethran/charts/actions?query=workflow%3Alinks)
 
 ## Google Charts
 
 [Google's interactive visualisation library](https://developers.google.com/chart)
 
-- [Area chart](charts/google/areachart.html) [[JSFiddle](https://jsfiddle.net/nithiya/yt7ab0Lo/)]
-- [Bar chart](charts/google/barchart.html) [[JSFiddle](https://jsfiddle.net/nithiya/qxcpz345/)]
-- [Column chart](charts/google/columnchart.html) [[JSFiddle](https://jsfiddle.net/nithiya/df0bmjt1/)]
-- [Gantt chart](charts/google/ganttchart.html) [[JSFiddle](https://jsfiddle.net/nithiya/s2kye3md/)]
-- [Pie chart](charts/google/piechart.html) [[JSFiddle](https://jsfiddle.net/nithiya/nm5pgksj/)]
+- Area chart [[HTML](charts/google/areachart.html)] [[JavaScript](charts/google/areachart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/yt7ab0Lo/)]
+- Bar chart [[HTML](charts/google/barchart.html)] [[JavaScript](charts/google/barchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/qxcpz345/)]
+- Column chart [[HTML](charts/google/columnchart.html)] [[JavaScript](charts/google/columnchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/df0bmjt1/)]
+- Gantt chart [[HTML](charts/google/ganttchart.html)] [[JavaScript](charts/google/ganttchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/s2kye3md/)]
+- Pie chart [[HTML](charts/google/piechart.html)] [[JavaScript](charts/google/piechart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/nm5pgksj/)]
 
 ## Bokeh
 
 [Python interactive visualisation library](https://docs.bokeh.org/en/latest/index.html)
 
-- [Geo chart using GeoJSON data](charts/bokeh/geomap-geojson.html) [[JSFiddle](https://jsfiddle.net/nithiya/Lj7fxs4k/)]
-- [Geo chart using CSV data](charts/bokeh/geomap.html) [[JSFiddle](https://jsfiddle.net/nithiya/7rwo1z59/)]
+- Geo polygon chart using GeoJSON data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/zones_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/visualisations/plotting-polygons-bokeh/)] [[JSFiddle](https://jsfiddle.net/nithiya/cg5s8n37/)]
+- Geo chart using CSV data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/met_stations_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/visualisations/mapping-geo-data-bokeh)] [[JSFiddle](https://jsfiddle.net/nithiya/8rqct9hd/)]
 
 ## References
 

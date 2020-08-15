@@ -10,15 +10,14 @@
 name: links
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: "0 9 14 * *"
   pull_request:
     branches:
       - master
 
 jobs:
-  awesome-bot:
+  test_links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
