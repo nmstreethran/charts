@@ -15,7 +15,7 @@
 [Python interactive visualisation library](https://docs.bokeh.org/en/latest/index.html)
 
 - Geo polygon chart using GeoJSON data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/zones_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/visualisations/plotting-polygons-bokeh/)] [[JSFiddle](https://jsfiddle.net/nithiya/cg5s8n37/)]
-- Geo chart using CSV data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/met_stations_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/visualisations/mapping-geo-data-bokeh)] [[JSFiddle](https://jsfiddle.net/nithiya/8rqct9hd/)]
+- Geo chart using CSV data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/met_stations_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/visualisations/mapping-geo-data-bokeh/)] [[JSFiddle](https://jsfiddle.net/nithiya/8rqct9hd/)]
 
 ## References
 
@@ -24,7 +24,7 @@
 
 ## License
 
-Code samples are licensed under the Apache License 2.0 (Apache-2.0).
+Code samples are licensed under the Apache License, Version 2.0 (Apache-2.0).
 
 ---
 
