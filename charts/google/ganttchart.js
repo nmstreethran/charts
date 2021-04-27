@@ -1,12 +1,16 @@
 // Ingesting data from Google Sheets https://developers.google.com/chart/interactive/docs/spreadsheets
 // Code courtesy of WhiteHat https://stackoverflow.com/questions/42332424/how-can-i-use-google-charts-to-draw-a-gantt-chart-using-data-from-a-google-sheet
+var sheetid = '1EyXVLmkQ2jIvdkSvimjWw0RpbofLuMhL7ynmxofqtco';
+var sheetgid = '0';
+var sheethead = '1';
+
 google.charts.load('current', {
   callback: drawChart,
   packages: ['gantt']
 });
 
 function drawChart() {
-  var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1EyXVLmkQ2jIvdkSvimjWw0RpbofLuMhL7ynmxofqtco/gviz/tq?gid=0&headers=1');
+  var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + sheetid + '/gviz/tq?gid=' + sheetgid + '&headers=' + sheethead);
   query.send(function(response) {
     if (response.isError()) {
       console.log('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
