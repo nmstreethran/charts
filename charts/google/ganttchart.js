@@ -24,49 +24,54 @@ var arad = 10; // arrow radius
 var aspace = 0; // space after arrow
 
 // plot the chart
-google.charts.load('current', {
-  callback: drawChart,
-  packages: ['gantt']
-});
+google.charts.load(
+  'current', {
+    callback: drawChart,
+    packages: ['gantt']
+  }
+);
 
 function drawChart() {
   var query = new google.visualization.Query(
     'https://docs.google.com/spreadsheets/d/' + sid + '/gviz/tq?gid=' +
     sgid + '&headers=' + sheader
   );
-  query.send(function(response) {
-    if (response.isError()) {
-      console.log('Error in query: ' + response.getMessage() + ' ' +
-        response.getDetailedMessage());
-      return;
+  query.send(
+    function(response) {
+      if (response.isError()) {
+        console.log(
+          'Error in query: ' + response.getMessage() + ' ' +
+          response.getDetailedMessage());
+        return;
+      }
+
+      var options = {
+        height: cheight,
+        width: cwidth,
+        gantt: {
+          labelStyle: {
+            fontName: lfont,
+            fontSize: lfontsize
+          },
+          barHeight: bheight,
+          barCornerRadius: bcrad,
+          trackHeight: theight,
+          innerGridDarkTrack: {
+            fill: tfill
+          },
+          labelMaxWidth: lmaxwidth,
+          arrow: {
+            length: alength,
+            radius: arad,
+            spaceAfter: aspace
+          }
+        },
+      };
+
+      var container = document.getElementById('chart_div');
+      var chart = new google.visualization.Gantt(container);
+
+      chart.draw(response.getDataTable(), options);
     }
-
-    var options = {
-      height: cheight,
-      width: cwidth,
-      gantt: {
-        labelStyle: {
-          fontName: lfont,
-          fontSize: lfontsize
-        },
-        barHeight: bheight,
-        barCornerRadius: bcrad,
-        trackHeight: theight,
-        innerGridDarkTrack: {
-          fill: tfill
-        },
-        labelMaxWidth: lmaxwidth,
-        arrow: {
-          length: alength,
-          radius: arad,
-          spaceAfter: aspace
-        }
-      },
-    };
-
-    var container = document.getElementById('chart_div');
-    var chart = new google.visualization.Gantt(container);
-
-    chart.draw(response.getDataTable(), options);
-  });
+  );
 }
