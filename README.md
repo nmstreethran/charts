@@ -23,12 +23,12 @@
 
 ### Python
 
-- [rioxarray + matplotlib raster visualisation](charts/python/rioxarray_matplotlib.ipynb)
+- [rioxarray + matplotlib raster visualisation](docs/rioxarray_matplotlib.ipynb)
 
 ### R
 
-- [lattice](charts/r/lattice.ipynb)
-- [rastervis](charts/r/rastervis.ipynb)
+- [lattice](docs/lattice.ipynb)
+- [rastervis](docs/rastervis.ipynb)
 
 ## References
 
