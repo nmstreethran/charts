@@ -1,3 +1,5 @@
+.empty/
+.ipynb_checkpoint/
 .vscode/
 *.code-workspace
 draft/

@@ -1,6 +1,8 @@
 # Charts
 
-## Google Charts
+## Interactive charts
+
+### Google Charts
 
 [Google's interactive visualisation library](https://developers.google.com/chart)
 
@@ -10,12 +12,23 @@
 - Gantt chart [[HTML](charts/google/ganttchart.html)] [[JavaScript](charts/google/ganttchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/s2kye3md/)]
 - Pie chart [[HTML](charts/google/piechart.html)] [[JavaScript](charts/google/piechart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/nm5pgksj/)]
 
-## Bokeh
+### Python
 
-[Python interactive visualisation library](https://docs.bokeh.org/en/latest/index.html)
+[Bokeh - Python interactive visualisation library](https://docs.bokeh.org/en/latest/index.html)
 
 - Geo polygon chart using GeoJSON data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/zones_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/post/plotting-polygons-bokeh/)] [[JSFiddle](https://jsfiddle.net/nithiya/cg5s8n37/)]
 - Geo chart using CSV data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/met_stations_plot.py)] [[How-to (nithiya.gitlab.io)](https://nithiya.gitlab.io/post/mapping-geo-data-bokeh/)] [[JSFiddle](https://jsfiddle.net/nithiya/8rqct9hd/)]
+
+## Static plots
+
+### Python
+
+- [rioxarray + matplotlib raster visualisation](charts/python/rioxarray_matplotlib.ipynb)
+
+### R
+
+- [lattice](charts/r/lattice.ipynb)
+- [rastervis](charts/r/rastervis.ipynb)
 
 ## References
 
@@ -28,7 +41,7 @@ Code samples are licensed under the Apache License, Version 2.0 (Apache-2.0).
 
 ---
 
-Copyright 2018-2020 Nithiya Streethran (nmstreethran at gmail dot com)
+Copyright 2018-2021 Nithiya Streethran (nmstreethran at gmail dot com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
