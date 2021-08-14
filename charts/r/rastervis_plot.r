@@ -4,10 +4,10 @@ library("rasterVis")
 # read the digital terrain model
 # OS Terrain 5
 dtm <- merge(
-    raster("data/terrain-5-dtm_4015029/nj/NJ06NE.asc"),
-    raster("data/terrain-5-dtm_4015029/nj/NJ06NW.asc"),
-    raster("data/terrain-5-dtm_4015029/nj/NJ06SE.asc"),
-    raster("data/terrain-5-dtm_4015029/nj/NJ06SW.asc"),
+    raster("terrain-5-dtm_4015029/nj/NJ06NE.asc"),
+    raster("terrain-5-dtm_4015029/nj/NJ06NW.asc"),
+    raster("terrain-5-dtm_4015029/nj/NJ06SE.asc"),
+    raster("terrain-5-dtm_4015029/nj/NJ06SW.asc"),
     ext = c(300000, 307000, 860000, 867000)
 )
 

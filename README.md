@@ -41,6 +41,8 @@
 6. [Merge/mosaic of multiple TIFF files using rioxarray](https://gis.stackexchange.com/q/376685/157288)
 7. [GeoPandas Mapping and Plotting Tools](https://geopandas.org/docs/user_guide/mapping.html)
 8. [rasterVis FAQ](https://oscarperpinan.github.io/rastervis/FAQ.html)
+9. [Customizing Matplotlib with style sheets and rcParams](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
+10. [Matplotlib style sheets reference](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html)
 
 ## License
 

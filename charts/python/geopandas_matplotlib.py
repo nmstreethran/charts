@@ -7,7 +7,8 @@ plt.style.use("Solarize_Light2")
 plt.rcParams["font.family"] = "Source Sans Pro"
 plt.rcParams["figure.dpi"] = 96
 plt.rcParams["axes.grid"] = False
-plt.rcParams["axes.titlesize"] = "12"
+plt.rcParams["axes.titlesize"] = "11"
+plt.rcParams["axes.labelsize"] = "10"
 
 # import data
 data = gpd.read_file("os_bdline/data/bdline_gb.gpkg", layer="country_region")
