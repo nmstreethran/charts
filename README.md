@@ -35,6 +35,12 @@
 
 1. [Ingesting chart data from Google Sheets](https://developers.google.com/chart/interactive/docs/spreadsheets)
 2. [Using Google Charts to draw a Gantt chart using data from a Google Sheet](https://stackoverflow.com/questions/42332424/how-can-i-use-google-charts-to-draw-a-gantt-chart-using-data-from-a-google-sheet)
+3. [Label Python data points on plot](https://stackoverflow.com/a/22272358/4573584)
+4. [Matplotlib colormap reference](https://matplotlib.org/stable/gallery/color/colormap_reference.html)
+5. [Matplotlib discrete colorbar](https://stackoverflow.com/q/14777066/4573584)
+6. [Merge/mosaic of multiple TIFF files using rioxarray](https://gis.stackexchange.com/q/376685/157288)
+7. [GeoPandas Mapping and Plotting Tools](https://geopandas.org/docs/user_guide/mapping.html)
+8. [rasterVis FAQ](https://oscarperpinan.github.io/rastervis/FAQ.html)
 
 ## License
 
