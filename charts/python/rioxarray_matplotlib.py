@@ -1,3 +1,7 @@
+# Plotting raster data with rioxarray and Matplotlib
+# Data used: OS Terrain® 50
+# (<https://osdatahub.os.uk/downloads/open/Terrain50>)
+
 # import libraries
 import matplotlib.pyplot as plt
 import rioxarray as rxr
@@ -8,16 +12,17 @@ plt.style.use("Solarize_Light2")
 plt.rcParams["font.family"] = "Source Sans Pro"
 plt.rcParams["figure.dpi"] = 96
 plt.rcParams["axes.grid"] = False
+plt.rcParams["text.color"] = "darkslategrey"
 plt.rcParams["axes.titlesize"] = "11"
 plt.rcParams["axes.labelsize"] = "10"
 
 # read the digital terrain model
-# OS Terrain 5
+# OS Terrain 50
 rasters = [
-    "terrain-5-dtm_4015029/nj/NJ06NE.asc",
-    "terrain-5-dtm_4015029/nj/NJ06NW.asc",
-    "terrain-5-dtm_4015029/nj/NJ06SE.asc",
-    "terrain-5-dtm_4015029/nj/NJ06SW.asc"
+    "data/Terrain50/sn91_OST50GRID_20210507/SN91.asc",
+    "data/Terrain50/sn92_OST50GRID_20210507/SN92.asc",
+    "data/Terrain50/so01_OST50GRID_20210507/SO01.asc",
+    "data/Terrain50/so02_OST50GRID_20210507/SO02.asc"
 ]
 arrays = []
 
@@ -31,31 +36,41 @@ dtm
 
 # plot the DTM
 dtm.squeeze().plot.imshow(
-    cmap=plt.cm.get_cmap("terrain", 70),
+    cmap=plt.cm.get_cmap("terrain", 50),
     cbar_kwargs={"label": "Elevation (m)"},
     vmax=dtm.max(),
     vmin=dtm.min(),
-    figsize=(7, 7)
+    figsize=(9, 9)
 )
-plt.title("5 m Digital Terrain Model of Findhorn Bay")
-plt.xlabel("Eastings (m)")
-plt.ylabel("Northings (m)")
+plt.title("50 m Digital Terrain Model of the Brecon Beacons")
+plt.text(
+    297000,
+    208200,
+    "Contains OS data © Crown copyright and database right 2021"
+)
+plt.xlabel("Easting (m)")
+plt.ylabel("Northing (m)")
 plt.axis("equal")
 plt.show()
 
 # plot contours
-dtm.squeeze().plot.contour(
-    cmap=plt.cm.get_cmap("terrain", 20),
-    levels=20,
+CS = dtm.squeeze().plot.contour(
+    cmap=plt.cm.get_cmap("inferno", 10),
+    levels=10,
     linewidths=.5,
-    add_colorbar=True,
-    cbar_kwargs={"label": "Elevation (m)"},
+    add_colorbar=False,
     vmax=dtm.max(),
     vmin=dtm.min(),
     figsize=(7, 7)
 )
-plt.title("5 m Digital Terrain Model of Findhorn Bay")
-plt.xlabel("Eastings (m)")
-plt.ylabel("Northings (m)")
+plt.title("50 m Digital Terrain Model of the Brecon Beacons")
+plt.text(
+    296800,
+    207600,
+    "Contains OS data © Crown copyright and database right 2021"
+)
+plt.clabel(CS, inline=True)
+plt.xlabel("Easting (m)")
+plt.ylabel("Northing (m)")
 plt.axis("equal")
 plt.show()
