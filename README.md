@@ -30,6 +30,7 @@
 
 - lattice [[script](charts/r/lattice_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)]
 - rasterVis [[script](charts/r/rastervis_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)]
+- sf [[script](charts/r/sf_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)]
 
 ## References
 
@@ -44,6 +45,7 @@
 9. [Customizing Matplotlib with style sheets and rcParams](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
 10. [Matplotlib style sheets reference](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html)
 11. [How to change the size of R plots in Jupyter](https://stackoverflow.com/a/60196822/4573584)
+12. [R colorspace](https://colorspace.r-forge.r-project.org/)
 
 ## License
 
