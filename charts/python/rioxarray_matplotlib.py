@@ -36,7 +36,7 @@ dtm
 
 # plot the DTM
 dtm.squeeze().plot.imshow(
-    cmap=plt.cm.get_cmap("terrain", 50),
+    cmap="terrain",
     cbar_kwargs={"label": "Elevation (m)"},
     vmax=dtm.max(),
     vmin=dtm.min(),
@@ -55,18 +55,41 @@ plt.show()
 
 # plot contours
 CS = dtm.squeeze().plot.contour(
-    cmap=plt.cm.get_cmap("inferno", 10),
-    levels=10,
+    cmap="inferno",
     linewidths=.5,
     add_colorbar=False,
-    vmax=dtm.max(),
-    vmin=dtm.min(),
     figsize=(7, 7)
 )
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
     296800,
     207600,
+    "Contains OS data © Crown copyright and database right 2021"
+)
+plt.clabel(CS, inline=True)
+plt.xlabel("Easting (m)")
+plt.ylabel("Northing (m)")
+plt.axis("equal")
+plt.show()
+
+# contour overlay
+dtm.squeeze().plot.imshow(
+    cmap="terrain",
+    cbar_kwargs={"label": "Elevation (m)"},
+    vmax=dtm.max(),
+    vmin=dtm.min(),
+    figsize=(9, 9)
+)
+
+CS = dtm.squeeze().plot.contour(
+    colors="black",
+    linewidths=.5
+)
+
+plt.title("50 m Digital Terrain Model of the Brecon Beacons")
+plt.text(
+    297000,
+    208200,
     "Contains OS data © Crown copyright and database right 2021"
 )
 plt.clabel(CS, inline=True)
