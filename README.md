@@ -43,6 +43,7 @@
 8. [rasterVis FAQ](https://oscarperpinan.github.io/rastervis/FAQ.html)
 9. [Customizing Matplotlib with style sheets and rcParams](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
 10. [Matplotlib style sheets reference](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html)
+11. [How to change the size of R plots in Jupyter](https://stackoverflow.com/a/60196822/4573584)
 
 ## License
 
