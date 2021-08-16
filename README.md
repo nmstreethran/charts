@@ -16,20 +16,20 @@
 
 [Bokeh - Python interactive visualisation library](https://bokeh.org/)
 
-- Plotting simple polygons [[script](charts/python/bokeh_polygon.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)]
+- Plotting simple polygons [[script](charts/python/bokeh_polygon.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/bokeh_polygon.ipynb)]
 
 ## Static plots
 
 ### Python
 
-- Raster visualisation with rioxarray and Matplotlib [[script](charts/python/rioxarray_matplotlib.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)]
-- Vector visualisation with GeoPandas and Matplotlib [[script](charts/python/geopandas_matplotlib.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)]
+- Raster visualisation with rioxarray and Matplotlib [[script](charts/python/rioxarray_matplotlib.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/rioxarray.ipynb)]
+- Vector visualisation with GeoPandas and Matplotlib [[script](charts/python/geopandas_matplotlib.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/geopandas.ipynb)]
 
 ### R
 
-- lattice levelplots [[script](charts/r/lattice_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)]
-- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)]
-- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)]
+- lattice levelplots [[script](charts/r/lattice_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/lattice.ipynb)]
+- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/rastervis.ipynb)]
+- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/sf.ipynb)]
 
 ## References
 
