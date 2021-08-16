@@ -16,8 +16,7 @@
 
 [Bokeh - Python interactive visualisation library](https://bokeh.org/)
 
-- Geo polygon chart using GeoJSON data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/zones_plot.py)] [[JSFiddle](https://jsfiddle.net/nithiya/cg5s8n37/)]
-- Geo chart using CSV data [[Python script (GitLab)](https://gitlab.com/nithiya/ml-elec-model/-/blob/master/scripts/met_stations_plot.py)] [[JSFiddle](https://jsfiddle.net/nithiya/8rqct9hd/)]
+- Plotting simple polygons [[script](charts/python/bokeh_polygon.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)]
 
 ## Static plots
 
@@ -46,6 +45,8 @@
 10. [Matplotlib style sheets reference](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html)
 11. [How to change the size of R plots in Jupyter](https://stackoverflow.com/a/60196822/4573584)
 12. [R colorspace](https://colorspace.r-forge.r-project.org/)
+13. [Using Bokeh with Jupyter](https://docs.bokeh.org/en/latest/docs/user_guide/jupyter.html)
+14. [Mapping geo data with Bokeh](https://docs.bokeh.org/en/latest/docs/user_guide/geo.html)
 
 ## License
 
