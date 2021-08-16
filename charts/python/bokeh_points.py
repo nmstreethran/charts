@@ -1,7 +1,7 @@
-# Interactive plot of simple vector features (polygons)
+# Interactive plot of simple vector features (points)
 # with Bokeh and GeoPandas
-# Data used: Boundary-Line™
-# (<https://osdatahub.os.uk/downloads/open/BoundaryLine>)
+# Data used: Properties in Care in Scotland
+# (<https://portal.historicenvironment.scot/downloads/propertiesincare>)
 
 # import libraries
 import geopandas as gpd
@@ -18,9 +18,7 @@ output_notebook()
 tile_provider = get_provider(CARTODBPOSITRON_RETINA)
 
 # import data
-data = gpd.read_file(
-    "docs/data/os_bdline/data/bdline_gb.gpkg", layer="greater_london_const"
-)
+data = gpd.read_file("docs/data/pic/properties_in_care.shp")
 
 # reproject to web mercator
 data = data.to_crs(3857)
@@ -28,16 +26,23 @@ data = data.to_crs(3857)
 # convert data source to GeoJSON
 geo_source = GeoJSONDataSource(geojson=data.to_json())
 
-# generate unique colours for each constituency
-const = list(set(data["Name"]))
+# generate unique colours for each local authority
+const = list(set(data["LOCAL_AUTH"]))
 palette = viridis(len(const))
 color_map = CategoricalColorMapper(factors=const, palette=palette)
 
 # define plot title
 TITLE = (
-    "Greater London Constituencies. Contains OS Data" +
-    " © Crown copyright and database right 2021."
+    "Properties in Care in Scotland. © Historic Environment Scotland 2021."
 )
+
+# define tooltips
+TOOLTIPS = [
+    ("NAME", "@PIC_NAME"),
+    ("LOCAL_AUTH", "@LOCAL_AUTH"),
+    ("COORDINATES", "(@X, @Y)"),
+    ("ID", "@PIC_ID")
+]
 
 # configure plot figure
 p = figure(
@@ -45,7 +50,7 @@ p = figure(
     tools="wheel_zoom, pan, reset, hover, save",
     x_axis_location=None,
     y_axis_location=None,
-    tooltips=[("Name", "@Name"), ("Hectares", "@Hectares")],
+    tooltips=TOOLTIPS,
     x_axis_type="mercator",
     y_axis_type="mercator"
 )
@@ -56,15 +61,14 @@ p.grid.grid_line_color = None
 # set plot hover options
 p.hover.point_policy = "follow_mouse"
 
-# set plot data source and patches
-p.patches(
-    "xs",
-    "ys",
+# set plot data source
+p.circle(
+    "x",
+    "y",
     source=geo_source,
-    fill_color={"field": "Name", "transform": color_map},
-    line_color="white",
-    line_width=.5,
-    fill_alpha=.7
+    size=5,
+    line_width=0,
+    fill_color={"field": "LOCAL_AUTH", "transform": color_map}
 )
 
 # add map tiles to plot
