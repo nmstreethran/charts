@@ -13,8 +13,9 @@ plt.rcParams["font.family"] = "Source Sans Pro"
 plt.rcParams["figure.dpi"] = 96
 plt.rcParams["axes.grid"] = False
 plt.rcParams["text.color"] = "darkslategrey"
-plt.rcParams["axes.titlesize"] = "11"
+plt.rcParams["axes.titlesize"] = "14"
 plt.rcParams["axes.labelsize"] = "10"
+plt.rcParams["axes.titleweight"] = "700"
 
 # read the digital terrain model
 # OS Terrain 50

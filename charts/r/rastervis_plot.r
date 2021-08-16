@@ -76,3 +76,117 @@ layer({
         default.units = "native"
     )
 })
+
+# contours
+contourplot(
+    dtm,
+    xlab = "Easting (m)",
+    ylab = "Northing (m)",
+    main = "50 m Digital Terrain Model of the Brecon Beacons",
+    cuts = 5
+) +
+layer({
+    # add a north arrow
+    SpatialPolygonsRescale(
+        layout.north.arrow(), offset = c(293000, 227000), scale = 2000
+    )
+    xs <- seq(292000, 292000 + 3000, by = 1500)
+    # draw a scale bar
+    grid.rect(
+        x = xs,
+        y = 225750,
+        width = 1500,
+        height = 250,
+        gp = gpar(fill = rep(c("white", "black"), 2)),
+        default.units = "native"
+    )
+    # add scale bar labels
+    grid.text(
+        x = seq(292000, 292000 + 4500, by = 1500) - 650,
+        y = 225100, seq(0, 4500, by = 1500),
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+    # add scale bar unit
+    grid.text(
+        x = 296300,
+        y = 225750,
+        "m",
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+    # add projection info
+    grid.text(
+        x = 293500,
+        y = 226500,
+        "British National Grid",
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+    # add copyright info
+    grid.text(
+        x = 302000,
+        y = 210500,
+        "Contains OS data © Crown copyright and database right 2021",
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+})
+
+# DTM with contours
+levelplot(
+    dtm,
+    xlab = "Easting (m)",
+    ylab = "Northing (m)",
+    main = "50 m Digital Terrain Model of the Brecon Beacons",
+    cuts = 5,
+    col.regions = hcl.colors(n = 50, palette = "Temps"),
+    contour = TRUE
+) +
+layer({
+    # add a north arrow
+    SpatialPolygonsRescale(
+        layout.north.arrow(), offset = c(293000, 227000), scale = 2000
+    )
+    xs <- seq(292000, 292000 + 3000, by = 1500)
+    # draw a scale bar
+    grid.rect(
+        x = xs,
+        y = 225750,
+        width = 1500,
+        height = 250,
+        gp = gpar(fill = rep(c("white", "black"), 2)),
+        default.units = "native"
+    )
+    # add scale bar labels
+    grid.text(
+        x = seq(292000, 292000 + 4500, by = 1500) - 650,
+        y = 225100, seq(0, 4500, by = 1500),
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+    # add scale bar unit
+    grid.text(
+        x = 296300,
+        y = 225750,
+        "m",
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+    # add projection info
+    grid.text(
+        x = 293500,
+        y = 226500,
+        "British National Grid",
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+    # add copyright info
+    grid.text(
+        x = 302000,
+        y = 210500,
+        "Contains OS data © Crown copyright and database right 2021",
+        gp = gpar(cex = .6),
+        default.units = "native"
+    )
+})

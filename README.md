@@ -28,9 +28,9 @@
 
 ### R
 
-- lattice [[script](charts/r/lattice_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)]
-- rasterVis [[script](charts/r/rastervis_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)]
-- sf [[script](charts/r/sf_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)]
+- lattice levelplots [[script](charts/r/lattice_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)]
+- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)]
+- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)]
 
 ## References
 
