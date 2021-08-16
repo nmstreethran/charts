@@ -16,7 +16,8 @@
 
 [Bokeh - Python interactive visualisation library](https://bokeh.org/)
 
-- Plotting simple polygons [[script](charts/python/bokeh_polygon.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/bokeh_polygon.ipynb)]
+- Simple polygons [[script](charts/python/bokeh_polygon.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/0923726/docs/bokeh_polygon.ipynb)]
+- Points [[script](charts/python/bokeh_points.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/0923726/docs/bokeh_points.ipynb)]
 
 ## Static plots
 
