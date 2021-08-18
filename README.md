@@ -6,31 +6,29 @@
 
 [Google's interactive visualisation library](https://developers.google.com/chart)
 
-- Area chart [[HTML](charts/google/areachart.html)] [[JavaScript](charts/google/areachart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/yt7ab0Lo/)]
-- Bar chart [[HTML](charts/google/barchart.html)] [[JavaScript](charts/google/barchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/qxcpz345/)]
-- Column chart [[HTML](charts/google/columnchart.html)] [[JavaScript](charts/google/columnchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/df0bmjt1/)]
-- Gantt chart [[HTML](charts/google/ganttchart.html)] [[JavaScript](charts/google/ganttchart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/s2kye3md/)]
-- Pie chart [[HTML](charts/google/piechart.html)] [[JavaScript](charts/google/piechart.js)] [[JSFiddle](https://jsfiddle.net/nithiya/nm5pgksj/)]
+- Area chart [[HTML](charts/google/areachart.html)] [[JavaScript](charts/google/areachart.js)] [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/yt7ab0Lo/)
+- Bar chart [[HTML](charts/google/barchart.html)] [[JavaScript](charts/google/barchart.js)] [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/qxcpz345/)
+- Column chart [[HTML](charts/google/columnchart.html)] [[JavaScript](charts/google/columnchart.js)] [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/df0bmjt1/)
+- Gantt chart [[HTML](charts/google/ganttchart.html)] [[JavaScript](charts/google/ganttchart.js)] [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/s2kye3md/)
+- Pie chart [[HTML](charts/google/piechart.html)] [[JavaScript](charts/google/piechart.js)] [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/nm5pgksj/)
 
-### Python
+### Bokeh
 
-[Bokeh - Python interactive visualisation library](https://bokeh.org/)
-
-- Simple polygons [[script](charts/python/bokeh_polygon.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/0923726/docs/bokeh_polygon.ipynb)]
-- Points [[script](charts/python/bokeh_points.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/0923726/docs/bokeh_points.ipynb)]
+- Simple polygons [[script](charts/python/bokeh_polygon.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
+- Points [[script](charts/python/bokeh_points.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
 
 ## Static plots
 
-### Python
+### Matplotlib
 
-- Raster visualisation with rioxarray and Matplotlib [[script](charts/python/rioxarray_matplotlib.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/rioxarray.ipynb)]
-- Vector visualisation with GeoPandas and Matplotlib [[script](charts/python/geopandas_matplotlib.py)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/geopandas.ipynb)]
+- Raster visualisation with rioxarray [[script](charts/python/rioxarray_matplotlib.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
+- Vector visualisation with GeoPandas [[script](charts/python/geopandas_matplotlib.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
 
 ### R
 
-- lattice levelplots [[script](charts/r/lattice_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/lattice.ipynb)]
-- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/rastervis.ipynb)]
-- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [[Jupyter notebook (nbviewer)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/bee162b/docs/sf.ipynb)]
+- Lattice levelplots [[script](charts/r/lattice_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)
+- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
+- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
 
 ## References
 
@@ -68,3 +66,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+---
+
+Project badges are generated using [Shields.io](https://shields.io/) and [Simple Icons](https://simpleicons.org/).
