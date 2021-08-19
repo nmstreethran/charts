@@ -1,6 +1,10 @@
-# # Plotting vector data with GeoPandas and Matplotlib
+# Plotting vector data with GeoPandas and Matplotlib
 # Data used: Boundary-Line™
 # (<https://osdatahub.os.uk/downloads/open/BoundaryLine>)
+
+# change directory to root if using JupyterLab
+import os
+os.chdir("..")
 
 # import libraries
 import geopandas as gpd
@@ -23,7 +27,6 @@ plt.rcParams["axes.titleweight"] = "semibold"
 data = gpd.read_file(
     "data/os_bdline/data/bdline_gb.gpkg", layer="greater_london_const"
 )
-
 data["Name"] = data["Name"].str.slice(stop=-18)
 
 # choropleth map
@@ -32,7 +35,7 @@ base = data.plot(
     figsize=(7, 7),
     legend=True,
     column="Name",
-    legend_kwds={"loc": "upper right", "bbox_to_anchor": (1.35, 1)}
+    legend_kwds={"loc": "upper right", "bbox_to_anchor": (1.4, 1)}
 )
 plt.title("Greater London Constituencies")
 plt.text(
@@ -46,7 +49,8 @@ base.set_aspect("equal", "box")
 plt.show()
 
 # choropleth map - labels directly on plot
-base = data.plot(cmap="Set3", figsize=(7, 7), column="Name")
+base = data.plot(cmap="tab20b", figsize=(7, 7), column="Name", alpha=.35)
+data.boundary.plot(color="white", ax=base, linewidth=.5)
 data.centroid.plot(ax=base, color="darkslategrey", markersize=5)
 map_labels = zip(zip(data.centroid.x+500, data.centroid.y-300), data["Name"])
 for xy, lab in map_labels:
@@ -60,17 +64,4 @@ plt.text(
 base.set_aspect("equal", "box")
 plt.xlabel("Easting (m)")
 plt.ylabel("Northing (m)")
-plt.show()
-
-# boundaries
-base = data.boundary.plot(cmap="Dark2", figsize=(7, 7), linewidth=1)
-plt.title("Greater London Constituencies")
-plt.text(
-    501000,
-    154000,
-    "Contains OS data © Crown copyright and database right 2021"
-)
-plt.xlabel("Easting (m)")
-plt.ylabel("Northing (m)")
-base.set_aspect("equal", "box")
 plt.show()
