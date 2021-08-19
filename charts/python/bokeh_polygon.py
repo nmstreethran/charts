@@ -21,6 +21,7 @@ tile_provider = get_provider(CARTODBPOSITRON_RETINA)
 data = gpd.read_file(
     "docs/data/os_bdline/data/bdline_gb.gpkg", layer="greater_london_const"
 )
+data["Name"] = data["Name"].str.slice(stop=-18)
 
 # reproject to web mercator
 data = data.to_crs(3857)

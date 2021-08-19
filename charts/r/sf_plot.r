@@ -4,17 +4,21 @@
 
 # import libraries
 library("sf")
+library("stringr")
+library("colorspace")
 
 # set plot resolution
 options(repr.plot.res = 200)
 
-data <- st_read("data/os_bdline/data/bdline_gb.gpkg", "country_region")
+data <- st_read("data/os_bdline/data/bdline_gb.gpkg", "greater_london_const")
+data$Name <- str_split_fixed(data$Name, " GL Assembly Const", 2)[, 1]
 
 plot(
     data["Name"],
-    key.pos = 1,
+    key.pos = 4,
     border = FALSE,
-    main = "Countries in Great Britain",
-    pal = hcl.colors(3, palette = "viridis")
+    main = "Greater London Constituencies",
+    pal = divergingx_hcl("Spectral", n = length(data)),
+    key.width = lcm(6.5)
 )
 mtext("Contains OS data © Crown copyright and database right 2021", side = 1)

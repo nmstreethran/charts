@@ -7,15 +7,18 @@ import matplotlib.pyplot as plt
 import rioxarray as rxr
 from rioxarray.merge import merge_arrays
 
-# alter style of plots
+# configure plot styles
 plt.style.use("Solarize_Light2")
 plt.rcParams["font.family"] = "Source Sans Pro"
 plt.rcParams["figure.dpi"] = 96
 plt.rcParams["axes.grid"] = False
 plt.rcParams["text.color"] = "darkslategrey"
-plt.rcParams["axes.titlesize"] = "14"
+plt.rcParams["axes.labelcolor"] = "darkslategrey"
+plt.rcParams["xtick.labelcolor"] = "darkslategrey"
+plt.rcParams["ytick.labelcolor"] = "darkslategrey"
+plt.rcParams["axes.titlesize"] = "12"
 plt.rcParams["axes.labelsize"] = "10"
-plt.rcParams["axes.titleweight"] = "700"
+plt.rcParams["axes.titleweight"] = "semibold"
 
 # read the digital terrain model
 # OS Terrain 50
@@ -82,10 +85,7 @@ dtm.squeeze().plot.imshow(
     figsize=(9, 9)
 )
 
-CS = dtm.squeeze().plot.contour(
-    colors="black",
-    linewidths=.5
-)
+CS = dtm.squeeze().plot.contour(colors="black", linewidths=.5)
 
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
