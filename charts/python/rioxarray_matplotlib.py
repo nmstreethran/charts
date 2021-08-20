@@ -46,6 +46,7 @@ dtm.squeeze().plot.imshow(
     vmin=dtm.min(),
     figsize=(9, 9)
 )
+
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
     297000,
@@ -55,6 +56,7 @@ plt.text(
 plt.xlabel("Easting (m)")
 plt.ylabel("Northing (m)")
 plt.axis("equal")
+
 plt.show()
 
 # plot contours
@@ -64,6 +66,7 @@ CS = dtm.squeeze().plot.contour(
     add_colorbar=False,
     figsize=(7, 7)
 )
+
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
     296800,
@@ -74,6 +77,7 @@ plt.clabel(CS, inline=True)
 plt.xlabel("Easting (m)")
 plt.ylabel("Northing (m)")
 plt.axis("equal")
+
 plt.show()
 
 # contour overlay
@@ -97,4 +101,5 @@ plt.clabel(CS, inline=True)
 plt.xlabel("Easting (m)")
 plt.ylabel("Northing (m)")
 plt.axis("equal")
+
 plt.show()
