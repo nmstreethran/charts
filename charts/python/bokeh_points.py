@@ -20,6 +20,9 @@ tile_provider = get_provider(CARTODBPOSITRON_RETINA)
 # import data
 data = gpd.read_file("data/pic/properties_in_care.shp")
 
+# view data
+data.head(5)
+
 # reproject to web mercator
 data = data.to_crs(3857)
 

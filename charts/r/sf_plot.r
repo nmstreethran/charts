@@ -10,8 +10,12 @@ library("colorspace")
 # set plot resolution
 options(repr.plot.res = 200)
 
+# load data
 data <- st_read("data/os_bdline/data/bdline_gb.gpkg", "greater_london_const")
 data$Name <- str_split_fixed(data$Name, " GL Assembly Const", 2)[, 1]
+
+# view data
+head(data, 5)
 
 # Categorical
 plot(

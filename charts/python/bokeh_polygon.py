@@ -25,6 +25,9 @@ data = gpd.read_file(
 )
 data["Name"] = data["Name"].str.slice(stop=-18)
 
+# view data
+data.head(5)
+
 # reproject to web mercator
 data = data.to_crs(3857)
 
