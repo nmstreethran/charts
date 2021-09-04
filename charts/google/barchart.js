@@ -4,7 +4,7 @@
 // Ingesting data from Google Sheets (CC-BY-4.0 and Apache-2.0)
 // https://developers.google.com/chart/interactive/docs/spreadsheets
 // StackOverflow answer by WhiteHat (CC-BY-SA-3.0)
-// https://stackoverflow.com/a/42335062/4573584
+// https://stackoverflow.com/a/42335062
 
 // define variables
 var sid = '1CIkj1xhkPyo0LQEIZplKNGS7S6jmcM3MpDlTMghN23Q'; // Google Sheet ID

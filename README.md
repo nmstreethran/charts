@@ -30,6 +30,32 @@
 - Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
 - Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
 
+## Environments
+
+### Python
+
+```sh
+conda create --channel conda-forge --name py-env python=3 geopandas matplotlib rioxarray jupyterlab jupyter_bokeh
+conda activate py-env
+```
+
+### R
+
+```sh
+conda create --channel conda-forge --name r-env r-base r-essentials r-rgdal r-rastervis r-sf r-geojsonio jupyterlab
+conda activate r-env
+R -e "IRkernel::installspec()"
+```
+
+<!-- ### JavaScript
+
+```sh
+conda create --channel conda-forge --name js-env nodejs jupyterlab
+conda activate js-env
+npm install --global ijavascript
+ijsinstall
+``` -->
+
 ## References
 
 1. [Ingesting chart data from Google Sheets](https://developers.google.com/chart/interactive/docs/spreadsheets)
@@ -46,6 +72,9 @@
 12. [R colorspace](https://colorspace.r-forge.r-project.org/)
 13. [Using Bokeh with Jupyter](https://docs.bokeh.org/en/latest/docs/user_guide/jupyter.html)
 14. [Mapping geo data with Bokeh](https://docs.bokeh.org/en/latest/docs/user_guide/geo.html)
+
+<!-- 1. [IJavaScript](https://github.com/n-riesco/ijavascript)
+1. [HTML output using IJavaScript](https://n-riesco.github.io/ijavascript/doc/custom.ipynb.html#$$.html(htmlString)) -->
 
 ## License
 
