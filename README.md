@@ -14,21 +14,21 @@
 
 ### Bokeh
 
-- Simple polygons [[script](charts/python/bokeh_polygon.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
-- Points [[script](charts/python/bokeh_points.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
+- Simple polygons [[script](charts/python/bokeh_polygon.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
+- Points [[script](charts/python/bokeh_points.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
 
 ## Static plots
 
 ### Matplotlib
 
-- Raster visualisation with rioxarray [[script](charts/python/rioxarray_matplotlib.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
-- Vector visualisation with GeoPandas [[script](charts/python/geopandas_matplotlib.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
+- Raster visualisation with rioxarray [[script](charts/python/rioxarray_matplotlib.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
+- Vector visualisation with GeoPandas [[script](charts/python/geopandas_matplotlib.py)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
 
 ### R
 
-- Lattice levelplots [[script](charts/r/lattice_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)
-- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
-- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.jupyter.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
+- Lattice levelplots [[script](charts/r/lattice_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)
+- Raster visualisation with rasterVis [[script](charts/r/rastervis_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
+- Simple vector feature visualisation with sf [[script](charts/r/sf_plot.r)] [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
 
 ## Environments
 
