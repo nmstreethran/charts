@@ -2,9 +2,9 @@
 import os
 from glob import glob
 from qgis.core import (
+    QgsApplication,
     QgsProject,
     QgsRasterLayer,
-    QgsApplication,
     QgsVectorLayer,
     QgsProcessingFeedback
 )
@@ -66,8 +66,7 @@ for raster in rlist:
 # add vector layers
 add_vector_layer(os.path.join("data", "layer.shp"))
 add_vector_layer(
-    os.path.join("data", "data.gpkg|layername=layer",
-    "boundary_line")
+    os.path.join("data", "data.gpkg|layername=layer"), "boundary_line"
 )
 
 # set raster style using QML file

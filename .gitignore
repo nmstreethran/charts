@@ -1,7 +1,7 @@
 .empty/
 .ipynb_checkpoints/
 .vscode/
-*.code-workspace
+*.qgz
 draft/
 archive/
 data/
