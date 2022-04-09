@@ -38,6 +38,10 @@ Lattice levelplots | [[script](charts/r/lattice_plot.r)] | [![View Jupyter Noteb
 Raster visualisation with rasterVis | [[script](charts/r/rastervis_plot.r)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
 Simple vector feature visualisation with sf | [[script](charts/r/sf_plot.r)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
 
+## QGIS maps
+
+See [charts/py-qgis](charts/py-qgis).
+
 ## Environments
 
 ### Python
@@ -90,7 +94,7 @@ Code samples are licensed under the Apache License, Version 2.0 (Apache-2.0).
 
 ---
 
-Copyright 2018-2021 Nithiya Streethran (nmstreethran at gmail dot com)
+Copyright 2018-2022 Nithiya Streethran (nmstreethran at gmail dot com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
