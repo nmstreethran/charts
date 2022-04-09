@@ -1,0 +1,36 @@
+# Check links in text files
+# https://github.com/dkhamsing/awesome_bot
+#
+# To automatically get bug fixes and new Ruby versions for
+# ruby/setup-ruby, use ruby/setup-ruby@v1
+# (see https://github.com/ruby/setup-ruby#versioning)
+
+name: test_links
+
+on:
+  schedule:
+    - cron: "0 5 24 3,6,9,12 *"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # container: dkhamsing/awesome_bot  # Docker method
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      # begin Ruby gem method
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+      - name: Install awesome_bot and dependencies
+        run: |
+          gem install awesome_bot
+      # end Ruby gem method
+      - name: Check links using awesome_bot
+        run: |
+          awesome_bot --allow-dupe --skip-save-results \
+          `find . -name "*.md"`
