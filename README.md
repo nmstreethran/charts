@@ -8,18 +8,18 @@
 
 &nbsp; | Source | Output
 -- | -- | --
-Area chart | [[HTML](charts/google/areachart.html)] [[JavaScript](charts/google/areachart.js)] | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/yt7ab0Lo/)
-Bar chart | [[HTML](charts/google/barchart.html)] [[JavaScript](charts/google/barchart.js)] | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/qxcpz345/)
-Column chart | [[HTML](charts/google/columnchart.html)] [[JavaScript](charts/google/columnchart.js)] | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/df0bmjt1/)
-Gantt chart | [[HTML](charts/google/ganttchart.html)] [[JavaScript](charts/google/ganttchart.js)] | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/s2kye3md/)
-Pie chart | [[HTML](charts/google/piechart.html)] [[JavaScript](charts/google/piechart.js)] | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/nm5pgksj/)
+Area chart | [![View HTML](badges/html.svg)](charts/google/areachart.html) [![View JavaScript](badges/javascript.svg)](charts/google/areachart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/yt7ab0Lo/)
+Bar chart | [![View HTML](badges/html.svg)](charts/google/barchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/barchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/qxcpz345/)
+Column chart | [![View HTML](badges/html.svg)](charts/google/columnchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/columnchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/df0bmjt1/)
+Gantt chart | [![View HTML](badges/html.svg)](charts/google/ganttchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/ganttchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/s2kye3md/)
+Pie chart | [![View HTML](badges/html.svg)](charts/google/piechart.html) [![View JavaScript](badges/javascript.svg)](charts/google/piechart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/nm5pgksj/)
 
 ### Bokeh
 
 &nbsp; | Source | Output
 -- | -- | --
-Simple polygons | [[script](charts/python/bokeh_polygon.py)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
-Points | [[script](charts/python/bokeh_points.py)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
+Simple polygons | [![View Python script](badges/python.svg)](charts/python/bokeh_polygon.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
+Points | [![View Python script](badges/python.svg)](charts/python/bokeh_points.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
 
 ## Static plots
 
@@ -27,16 +27,16 @@ Points | [[script](charts/python/bokeh_points.py)] | [![View Jupyter Notebook](b
 
 &nbsp; | Source | Output
 -- | -- | --
-Raster visualisation with rioxarray | [[script](charts/python/rioxarray_matplotlib.py)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
-Vector visualisation with GeoPandas | [[script](charts/python/geopandas_matplotlib.py)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
+Raster visualisation with rioxarray | [![View Python script](badges/python.svg)](charts/python/rioxarray_matplotlib.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
+Vector visualisation with GeoPandas | [![View Python script](badges/python.svg)](charts/python/geopandas_matplotlib.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
 
 ### R
 
 &nbsp; | Source | Output
 -- | -- | --
-Lattice levelplots | [[script](charts/r/lattice_plot.r)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)
-Raster visualisation with rasterVis | [[script](charts/r/rastervis_plot.r)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
-Simple vector feature visualisation with sf | [[script](charts/r/sf_plot.r)] | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
+Lattice levelplots | [![View R script](badges/r.svg)](charts/r/lattice_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/lattice.ipynb)
+Raster visualisation with rasterVis | [![View R script](badges/r.svg)](charts/r/rastervis_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rastervis.ipynb)
+Simple vector feature visualisation with sf | [![View R script](badges/r.svg)](charts/r/sf_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/sf.ipynb)
 
 ## QGIS maps
 
