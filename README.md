@@ -40,7 +40,7 @@ Simple vector feature visualisation with sf | [![View R script](badges/r.svg)](c
 
 ## QGIS maps
 
-See [charts/py-qgis](charts/py-qgis).
+See [maps](maps).
 
 ## Environments
 
