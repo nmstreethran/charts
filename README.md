@@ -76,7 +76,7 @@ ijsinstall
 4. [Matplotlib colormap reference](https://matplotlib.org/stable/gallery/color/colormap_reference.html)
 5. [Matplotlib discrete colorbar](https://stackoverflow.com/q/14777066)
 6. [Merge/mosaic of multiple TIFF files using rioxarray](https://gis.stackexchange.com/q/376685)
-7. [GeoPandas Mapping and Plotting Tools](https://geopandas.org/docs/user_guide/mapping.html)
+7. [GeoPandas Mapping and Plotting Tools](https://geopandas.org/en/stable/docs/user_guide/mapping.html)
 8. [rasterVis FAQ](https://oscarperpinan.github.io/rastervis/FAQ.html)
 9. [Customizing Matplotlib with style sheets and rcParams](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
 10. [Matplotlib style sheets reference](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html)
