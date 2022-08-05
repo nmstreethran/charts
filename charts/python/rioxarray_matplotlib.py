@@ -1,4 +1,4 @@
-# Plotting raster data with rioxarray and Matplotlib
+# Plotting raster data with rioxarray and Matplotlib - digital terrain model
 # Data used: OS Terrain® 50
 # (<https://osdatahub.os.uk/downloads/open/Terrain50>)
 

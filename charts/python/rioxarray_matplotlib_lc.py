@@ -1,11 +1,10 @@
-# %% [markdown]
-# # Plotting land cover raster data with rioxarray and Matplotlib
-# 
+# Plotting land cover raster data with rioxarray and Matplotlib
 # Data used:
-# 
-# Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri; Heiskanen, Janne (2021), “Taita Taveta County, Kenya - 2020 Land cover map and reference database ”, Mendeley Data, V2, doi: [10.17632/xv24ngy2dz.2](https://doi.org/10.17632/xv24ngy2dz.2)
+# Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri;
+# Heiskanen, Janne (2021), “Taita Taveta County, Kenya - 2020 Land cover map
+# and reference database ”, Mendeley Data, V2,
+# https://doi.org/10.17632/xv24ngy2dz.2
 
-# %%
 # import libraries
 import multiprocessing
 import platform
@@ -26,17 +25,14 @@ import xml.etree.ElementTree as ET
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 import numpy as np
 import rioxarray as rxr
 from dask.distributed import Client, LocalCluster, Lock
 from dask.utils import SerializableLock
 
-# %%
 print("Last updated:", datetime.now(tz=timezone.utc))
 
-# %%
 # configure plot styles
 plt.style.use("seaborn-whitegrid")
 plt.rcParams["font.family"] = "Segoe UI"
@@ -52,7 +48,6 @@ plt.rcParams["figure.titlesize"] = "13"
 plt.rcParams["axes.titlesize"] = "12"
 plt.rcParams["axes.labelsize"] = "10"
 
-# %%
 # download data
 URL = (
     "https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/" +
@@ -71,11 +66,9 @@ if r.status_code == 200:
 else:
     print("\nStatus code:", r.status_code)
 
-# %%
 # list of files in the ZIP archive
 zipfile.ZipFile(ZIP_FILE).namelist()
 
-# %%
 # extract the archive
 DATA_DIR = os.path.join("data", "kenya_land_cover")
 
@@ -85,7 +78,6 @@ try:
 except zipfile.BadZipFile:
     print("There were issues with the file", ZIP_FILE)
 
-# %%
 # define paths to the TIF and QML files
 for i in zipfile.ZipFile(ZIP_FILE).namelist():
     if i.endswith(".tif"):
@@ -93,7 +85,6 @@ for i in zipfile.ZipFile(ZIP_FILE).namelist():
     elif i.endswith(".qml"):
         style_file = os.path.join(DATA_DIR, i)
 
-# %%
 # read the raster
 # use Dask for parallel computing
 # https://corteva.github.io/rioxarray/stable/examples/dask_read_write.html
@@ -112,19 +103,14 @@ with LocalCluster() as cluster, Client(cluster) as client:
         lock=Lock("rio", client=client)
     )
 
-# %%
 landcover
 
-# %%
 landcover.rio.resolution()
 
-# %%
 landcover.rio.bounds()
 
-# %%
 landcover.rio.crs
 
-# %%
 # get unique value count for the raster
 uniquevals = pd.DataFrame(
     np.unique(landcover, return_counts=True)
@@ -139,10 +125,8 @@ uniquevals.dropna(inplace=True)
 # convert value column to string
 uniquevals["value"] = uniquevals["value"].astype(int).astype(str)
 
-# %%
 uniquevals
 
-# %%
 # read the QGIS style file containing the legend entries
 tree = ET.parse(style_file)
 root = tree.getroot()
@@ -163,10 +147,8 @@ legend.drop(columns="alpha", inplace=True)
 # convert value column to string
 legend["value"] = legend["value"].astype(str)
 
-# %%
 legend
 
-# %%
 # merge unique value dataframe with legend
 uniquevals = uniquevals.merge(legend, on="value")
 
@@ -179,10 +161,8 @@ uniquevals["percentage"] = uniquevals["percentage"].astype(int)
 # sort by count
 uniquevals.sort_values("count", ascending=False, inplace=True)
 
-# %%
 uniquevals
 
-# %%
 # plot the major land cover types, i.e. percentage > 0
 mask = uniquevals["percentage"] > 0
 uniquevals_sig = uniquevals[mask]
@@ -201,12 +181,10 @@ plt.ylabel("")
 plt.xlabel("Land cover (%)")
 plt.show()
 
-# %%
 # convert values to integer and sort
 uniquevals["value"] = uniquevals["value"].astype(int)
 uniquevals.sort_values("value", inplace=True)
 
-# %%
 # create a continuous colourmap for the plot
 colours = list(uniquevals["color"])
 nodes = np.array(uniquevals["value"])
@@ -217,12 +195,10 @@ colours = LinearSegmentedColormap.from_list(
 )
 colours
 
-# %%
 # create a discrete colourmap for the legend
 col_discrete = ListedColormap(list(uniquevals["color"]))
 col_discrete
 
-# %%
 img = plt.figure(figsize=(15, 15))
 img = plt.imshow(np.array([[0, len(uniquevals)]]), cmap=col_discrete)
 img.set_visible(False)
@@ -244,8 +220,3 @@ plt.text(
 )
 
 plt.show()
-
-# %%
-
-
-
