@@ -36,7 +36,7 @@ print("Last updated:", datetime.now(tz=timezone.utc))
 # configure plot styles
 plt.style.use("seaborn-whitegrid")
 plt.rcParams["font.family"] = "Segoe UI"
-plt.rcParams["figure.dpi"] = 96
+plt.rcParams["figure.dpi"] = 150
 plt.rcParams["axes.grid"] = False
 plt.rcParams["text.color"] = "darkslategrey"
 plt.rcParams["axes.labelcolor"] = "darkslategrey"
@@ -48,6 +48,10 @@ plt.rcParams["figure.titlesize"] = "13"
 plt.rcParams["axes.titlesize"] = "12"
 plt.rcParams["axes.labelsize"] = "10"
 
+# define data directories
+DATA_DIR = os.path.join("data", "kenya_land_cover")
+ZIP_FILE = os.path.join("data", "kenya_land_cover.zip")
+
 # download data
 URL = (
     "https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/" +
@@ -56,8 +60,6 @@ URL = (
 r = requests.get(URL, stream=True)
 
 os.makedirs("data", exist_ok=True)
-
-ZIP_FILE = os.path.join("data", "kenya_land_cover.zip")
 
 if r.status_code == 200:
     with open(ZIP_FILE, "wb") as filedl:
@@ -70,8 +72,6 @@ else:
 zipfile.ZipFile(ZIP_FILE).namelist()
 
 # extract the archive
-DATA_DIR = os.path.join("data", "kenya_land_cover")
-
 try:
     z = zipfile.ZipFile(ZIP_FILE)
     z.extractall(DATA_DIR)
@@ -112,9 +112,7 @@ landcover.rio.bounds()
 landcover.rio.crs
 
 # get unique value count for the raster
-uniquevals = pd.DataFrame(
-    np.unique(landcover, return_counts=True)
-).transpose()
+uniquevals = pd.DataFrame(np.unique(landcover, return_counts=True)).transpose()
 
 # assign column names
 uniquevals.columns = ["value", "count"]
@@ -122,7 +120,7 @@ uniquevals.columns = ["value", "count"]
 # drop row(s) with NaN
 uniquevals.dropna(inplace=True)
 
-# convert value column to string
+# convert value column to string (this is required for merging later)
 uniquevals["value"] = uniquevals["value"].astype(int).astype(str)
 
 uniquevals
@@ -144,12 +142,12 @@ legend = pd.DataFrame(legend)
 # drop alpha column
 legend.drop(columns="alpha", inplace=True)
 
-# convert value column to string
+# convert value column to string (this is required for merging later)
 legend["value"] = legend["value"].astype(str)
 
 legend
 
-# merge unique value dataframe with legend
+# merge unique values data frame with legend
 uniquevals = uniquevals.merge(legend, on="value")
 
 # calculate percentage based on count
@@ -199,24 +197,25 @@ colours
 col_discrete = ListedColormap(list(uniquevals["color"]))
 col_discrete
 
+# create a dummy plot for the discrete colour map as the legend
 img = plt.figure(figsize=(15, 15))
 img = plt.imshow(np.array([[0, len(uniquevals)]]), cmap=col_discrete)
 img.set_visible(False)
 
+# assign the legend's tick labels
 ticks = list(np.arange(.5, len(uniquevals) + .5, 1))
 cbar = plt.colorbar(ticks=ticks)
 cbar.ax.set_yticklabels(list(uniquevals["label"]))
 
 landcover.plot(add_colorbar=False, cmap=colours)
 
-plt.title("Taita Taveta County, Kenya - 2020 Land cover map")
-
 plt.axis("equal")
 plt.xlim(landcover.rio.bounds()[0] - .01, landcover.rio.bounds()[2] + .01)
 plt.ylim(landcover.rio.bounds()[1] - .01, landcover.rio.bounds()[3] + .01)
-plt.text(
-    38.75, -4.4,
-    "Data: © Abera et al. 2021 (CC-BY-4.0)"
-)
+
+plt.title("Taita Taveta County, Kenya - 2020 Land cover map")
+plt.text(38.75, -4.4, "Data: © Abera et al. 2021 (CC-BY-4.0)")
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
 
 plt.show()
