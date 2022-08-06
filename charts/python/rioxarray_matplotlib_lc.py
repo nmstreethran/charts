@@ -1,9 +1,9 @@
 # Plotting land cover raster data with rioxarray and Matplotlib
 # Data used:
 # Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri;
-# Heiskanen, Janne (2021), “Taita Taveta County, Kenya - 2020 Land cover map
-# and reference database ”, Mendeley Data, V2,
-# https://doi.org/10.17632/xv24ngy2dz.2
+# Heiskanen, Janne (2021), "Taita Taveta County, Kenya - 2020 Land cover map
+# and reference database", Mendeley Data, V2,
+# https://doi.org/10.17632/xv24ngy2dz.2 - CC-BY-4.0
 
 # import libraries
 import multiprocessing
