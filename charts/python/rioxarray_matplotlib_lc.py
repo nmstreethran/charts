@@ -35,7 +35,7 @@ print("Last updated:", datetime.now(tz=timezone.utc))
 
 # configure plot styles
 plt.style.use("seaborn-whitegrid")
-plt.rcParams["font.family"] = "Segoe UI"
+plt.rcParams["font.family"] = "Source Sans 3"
 plt.rcParams["figure.dpi"] = 150
 plt.rcParams["axes.grid"] = False
 plt.rcParams["text.color"] = "darkslategrey"
@@ -65,6 +65,7 @@ if r.status_code == 200:
     with open(ZIP_FILE, "wb") as filedl:
         for chunk in r.iter_content(chunk_size=1048676):
             filedl.write(chunk)
+    print("Data downloaded:", datetime.now(tz=timezone.utc))
 else:
     print("\nStatus code:", r.status_code)
 
