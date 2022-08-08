@@ -9,7 +9,7 @@
 import multiprocessing
 import platform
 import os
-import zipfile
+from zipfile import ZipFile, BadZipFile
 from datetime import datetime, timezone
 
 # Windows
@@ -50,7 +50,7 @@ plt.rcParams["axes.labelsize"] = "10"
 
 # define data directories
 DATA_DIR = os.path.join("data", "kenya_land_cover")
-ZIP_FILE = os.path.join("data", "kenya_land_cover.zip")
+ZIP_FILE = DATA_DIR + ".zip"
 
 # download data
 URL = (
@@ -70,17 +70,17 @@ else:
     print("\nStatus code:", r.status_code)
 
 # list of files in the ZIP archive
-zipfile.ZipFile(ZIP_FILE).namelist()
+ZipFile(ZIP_FILE).namelist()
 
 # extract the archive
 try:
-    z = zipfile.ZipFile(ZIP_FILE)
+    z = ZipFile(ZIP_FILE)
     z.extractall(DATA_DIR)
-except zipfile.BadZipFile:
+except BadZipFile:
     print("There were issues with the file", ZIP_FILE)
 
 # define paths to the TIF and QML files
-for i in zipfile.ZipFile(ZIP_FILE).namelist():
+for i in ZipFile(ZIP_FILE).namelist():
     if i.endswith(".tif"):
         raster_file = os.path.join(DATA_DIR, i)
     elif i.endswith(".qml"):
