@@ -1,9 +1,11 @@
-# Plotting land cover raster data with rioxarray and Matplotlib
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Plotting land cover raster data with rioxarray and Matplotlib
+#
 # Data used:
-# Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri;
-# Heiskanen, Janne (2021), "Taita Taveta County, Kenya - 2020 Land cover map
-# and reference database", Mendeley Data, V2,
-# https://doi.org/10.17632/xv24ngy2dz.2 - CC-BY-4.0
+#
+# - Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri; Heiskanen, Janne (2021), "Taita Taveta County, Kenya - 2020 Land cover map and reference database", Mendeley Data, V2, doi: [10.17632/xv24ngy2dz.2](https://doi.org/10.17632/xv24ngy2dz.2) - CC-BY-4.0
 
 # import libraries
 import multiprocessing
@@ -54,8 +56,8 @@ ZIP_FILE = DATA_DIR + ".zip"
 
 # download data
 URL = (
-    "https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/" +
-    "xv24ngy2dz-2.zip"
+    "https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/"
+    + "xv24ngy2dz-2.zip"
 )
 r = requests.get(URL, stream=True)
 
@@ -101,7 +103,7 @@ with LocalCluster() as cluster, Client(cluster) as client:
     landcover.rio.to_raster(
         os.path.join(DATA_DIR, "dask_multiworker.tif"),
         tiled=True,
-        lock=Lock("rio", client=client)
+        lock=Lock("rio", client=client),
     )
 
 landcover
@@ -167,14 +169,17 @@ mask = uniquevals["percentage"] > 0
 uniquevals_sig = uniquevals[mask]
 
 ax = uniquevals_sig.plot.barh(
-    x="label", y="percentage", legend=False, figsize=(9, 5),
-    color=uniquevals_sig["color"]
+    x="label",
+    y="percentage",
+    legend=False,
+    figsize=(9, 5),
+    color=uniquevals_sig["color"],
 )
 
 ax.bar_label(ax.containers[0], padding=3)
 plt.title(
-    "Major land cover types for Taita Taveta County, Kenya - 2020" +
-    "\n[Data: Abera et al. 2021 (CC-BY-4.0)]"
+    "Major land cover types for Taita Taveta County, Kenya - 2020"
+    + "\n[Data: Abera et al. 2021 (CC-BY-4.0)]"
 )
 plt.ylabel("")
 plt.xlabel("Land cover (%)")
@@ -189,9 +194,7 @@ colours = list(uniquevals["color"])
 nodes = np.array(uniquevals["value"])
 # normalisation
 nodes = (nodes - min(nodes)) / (max(nodes) - min(nodes))
-colours = LinearSegmentedColormap.from_list(
-    "LCM", list(zip(nodes, colours))
-)
+colours = LinearSegmentedColormap.from_list("LCM", list(zip(nodes, colours)))
 colours
 
 # create a discrete colourmap for the legend
@@ -204,15 +207,15 @@ img = plt.imshow(np.array([[0, len(uniquevals)]]), cmap=col_discrete)
 img.set_visible(False)
 
 # assign the legend's tick labels
-ticks = list(np.arange(.5, len(uniquevals) + .5, 1))
+ticks = list(np.arange(0.5, len(uniquevals) + 0.5, 1))
 cbar = plt.colorbar(ticks=ticks)
 cbar.ax.set_yticklabels(list(uniquevals["label"]))
 
 landcover.plot(add_colorbar=False, cmap=colours)
 
 plt.axis("equal")
-plt.xlim(landcover.rio.bounds()[0] - .01, landcover.rio.bounds()[2] + .01)
-plt.ylim(landcover.rio.bounds()[1] - .01, landcover.rio.bounds()[3] + .01)
+plt.xlim(landcover.rio.bounds()[0] - 0.01, landcover.rio.bounds()[2] + 0.01)
+plt.ylim(landcover.rio.bounds()[1] - 0.01, landcover.rio.bounds()[3] + 0.01)
 
 plt.title("Taita Taveta County, Kenya - 2020 Land cover map")
 plt.text(38.75, -4.4, "Data: © Abera et al. 2021 (CC-BY-4.0)")

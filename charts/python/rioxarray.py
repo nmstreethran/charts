@@ -1,6 +1,14 @@
-# Plotting raster data with rioxarray and Matplotlib - digital terrain model
-# Data used: OS Terrain® 50
-# (<https://osdatahub.os.uk/downloads/open/Terrain50>)
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Plotting raster data with rioxarray and Matplotlib - digital terrain model
+#
+# Data used: OS Terrain® 50 (<https://osdatahub.os.uk/downloads/open/Terrain50>)
+
+# change directory to root if using JupyterLab
+import os
+
+os.chdir("..")
 
 # import libraries
 import matplotlib.pyplot as plt
@@ -26,7 +34,7 @@ rasters = [
     "data/Terrain50/sn91_OST50GRID_20210507/SN91.asc",
     "data/Terrain50/sn92_OST50GRID_20210507/SN92.asc",
     "data/Terrain50/so01_OST50GRID_20210507/SO01.asc",
-    "data/Terrain50/so02_OST50GRID_20210507/SO02.asc"
+    "data/Terrain50/so02_OST50GRID_20210507/SO02.asc",
 ]
 arrays = []
 
@@ -44,14 +52,14 @@ dtm.squeeze().plot.imshow(
     cbar_kwargs={"label": "Elevation (m)"},
     vmax=dtm.max(),
     vmin=dtm.min(),
-    figsize=(9, 9)
+    figsize=(9, 9),
 )
 
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
     297000,
     208200,
-    "Contains OS data © Crown copyright and database right 2021"
+    "Contains OS data © Crown copyright and database right 2021",
 )
 plt.xlabel("Easting (m)")
 plt.ylabel("Northing (m)")
@@ -61,17 +69,14 @@ plt.show()
 
 # plot contours
 CS = dtm.squeeze().plot.contour(
-    cmap="inferno",
-    linewidths=.5,
-    add_colorbar=False,
-    figsize=(7, 7)
+    cmap="inferno", linewidths=0.5, add_colorbar=False, figsize=(7, 7)
 )
 
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
     296800,
     207600,
-    "Contains OS data © Crown copyright and database right 2021"
+    "Contains OS data © Crown copyright and database right 2021",
 )
 plt.clabel(CS, inline=True)
 plt.xlabel("Easting (m)")
@@ -86,16 +91,16 @@ dtm.squeeze().plot.imshow(
     cbar_kwargs={"label": "Elevation (m)"},
     vmax=dtm.max(),
     vmin=dtm.min(),
-    figsize=(9, 9)
+    figsize=(9, 9),
 )
 
-CS = dtm.squeeze().plot.contour(colors="black", linewidths=.5)
+CS = dtm.squeeze().plot.contour(colors="black", linewidths=0.5)
 
 plt.title("50 m Digital Terrain Model of the Brecon Beacons")
 plt.text(
     297000,
     208200,
-    "Contains OS data © Crown copyright and database right 2021"
+    "Contains OS data © Crown copyright and database right 2021",
 )
 plt.clabel(CS, inline=True)
 plt.xlabel("Easting (m)")

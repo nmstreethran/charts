@@ -27,9 +27,9 @@ Points | [![View Python script](badges/python.svg)](charts/python/bokeh_points.p
 
 &nbsp; | Source | Output
 -- | -- | --
-Raster visualisation with rioxarray - digital terrain model | [![View Python script](badges/python.svg)](charts/python/rioxarray_matplotlib.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
-Raster visualisation with rioxarray - land cover map | [![View Python script](badges/python.svg)](charts/python/rioxarray_matplotlib_lc.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray_lc.ipynb)
-Vector visualisation with GeoPandas | [![View Python script](badges/python.svg)](charts/python/geopandas_matplotlib.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
+Raster visualisation with rioxarray - digital terrain model | [![View Python script](badges/python.svg)](charts/python/rioxarray.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray.ipynb)
+Raster visualisation with rioxarray - land cover map | [![View Python script](badges/python.svg)](charts/python/rioxarray_lc.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/rioxarray_lc.ipynb)
+Vector visualisation with GeoPandas | [![View Python script](badges/python.svg)](charts/python/geopandas.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/geopandas.ipynb)
 
 ### R
 
