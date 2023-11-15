@@ -1,0 +1,13 @@
+black
+cartopy
+contextily
+dask[distributed]
+flake8
+geopandas
+jupyterlab
+matplotlib_scalebar
+mapclassify
+pooch
+pylint
+rioxarray
+scipy

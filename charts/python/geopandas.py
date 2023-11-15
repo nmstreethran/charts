@@ -6,16 +6,23 @@
 # Data used:
 #
 # - <https://data.gov.ie/dataset/pilgrim-paths>
-# - <https://data.gov.ie/dataset/irelands-sheela-na-gigs>
 # - <https://ec.europa.eu/eurostat/web/nuts/background>
 
 # import libraries
 import os
 from datetime import datetime, timezone
+from zipfile import BadZipFile, ZipFile
+
+import cartopy.crs as ccrs
+import contextily as cx
 import geopandas as gpd
-from zipfile import ZipFile, BadZipFile
 import matplotlib.pyplot as plt
 import pooch
+from matplotlib_scalebar.scalebar import ScaleBar
+
+# basemap cache directory
+cx.set_cache_dir(os.path.join("data", "basemaps"))
+os.makedirs(os.path.join("data", "basemaps"), exist_ok=True)
 
 # ## Data
 
@@ -57,39 +64,6 @@ pilgrim_paths.head()
 list(pilgrim_paths)
 
 pilgrim_paths.crs
-
-# ### Sheela-na-Gigs
-
-URL = "http://www.heritagecouncil.ie/content/files/SheelaNaGig.zip"
-FILE_NAME = "SheelaNaGig.zip"
-SUB_DIR = os.path.join("data", "SheelaNaGig")
-DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
-os.makedirs(SUB_DIR, exist_ok=True)
-
-# download data if necessary
-if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
-    pooch.retrieve(
-        url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
-    )
-
-    with open(
-        os.path.join(SUB_DIR, f"{FILE_NAME[:-4]}.txt"), "w", encoding="utf-8"
-    ) as outfile:
-        outfile.write(
-            f"Data downloaded on: {datetime.now(tz=timezone.utc)}\n"
-            f"Download URL: {URL}"
-        )
-
-# list of files in the ZIP archive
-ZipFile(DATA_FILE).namelist()
-
-sheela_na_gigs = gpd.read_file(f"zip://{DATA_FILE}!SheelaNaGig.shp")
-
-sheela_na_gigs.head()
-
-sheela_na_gigs["Sheela-na-Gig"] = "Sheela-na-Gig"
-
-sheela_na_gigs.crs
 
 # ### NUTS boundaries
 
@@ -134,7 +108,7 @@ nuts = gpd.read_file(f"zip://{DATA_FILE}!NUTS_RG_01M_2021_4326_LEVL_1.shp")
 
 nuts.head()
 
-# filter for Ireland and Northern Ireland
+# filter for Ireland
 nuts = nuts[nuts["NUTS_ID"].isin(["IE0", "UKN"])]
 
 nuts
@@ -143,111 +117,113 @@ nuts.crs
 
 # ## Plots
 
-fig = nuts.to_crs(pilgrim_paths.crs).plot(
-    color="navajowhite",
-    edgecolor="darkslategrey",
-    linewidth=0.5,
-    alpha=0.5,
-    figsize=(6.5, 6.5),
+# get map bounds
+xmin, ymin, xmax, ymax = nuts.to_crs(pilgrim_paths.crs).total_bounds
+
+ax = (
+    nuts.dissolve()
+    .to_crs(pilgrim_paths.crs)
+    .plot(
+        color="navajowhite",
+        edgecolor="darkslategrey",
+        linewidth=0.5,
+        alpha=0.5,
+        figsize=(6.5, 6.5),
+    )
 )
+
 pilgrim_paths.plot(
     column="Object_Typ",
     marker="d",
     cmap="tab20b",
-    ax=fig,
+    ax=ax,
     legend=True,
     legend_kwds={"loc": "upper right", "bbox_to_anchor": (1.45, 0.725)},
+    edgecolor="darkslategrey",
+    linewidth=0.5,
 )
-for legend_handle in fig.get_legend().legendHandles:
-    legend_handle.set_markeredgewidth(0.2)
+
+for legend_handle in ax.get_legend().legend_handles:
+    legend_handle.set_markeredgewidth(0.5)
     legend_handle.set_markeredgecolor("darkslategrey")
+
 plt.title("Pilgrim Paths in Ireland")
-plt.text(650000, 505000, "© EuroGeographics; gov.ie")
+plt.text(xmax - 180000, ymin - 10000, "© EuroGeographics; Heritage Council")
 plt.tick_params(labelbottom=False, labelleft=False)
 plt.tight_layout()
 plt.show()
 
-fig = nuts.to_crs(pilgrim_paths.crs).plot(
-    color="navajowhite",
+# label directly on plot
+ax = (
+    nuts.dissolve()
+    .to_crs(pilgrim_paths.crs)
+    .plot(
+        color="navajowhite",
+        edgecolor="darkslategrey",
+        linewidth=0.5,
+        alpha=0.5,
+        figsize=(6.5, 6.5),
+    )
+)
+
+pilgrim_paths.plot(
+    column="Object_Typ",
+    marker="X",
+    cmap="viridis",
+    ax=ax,
     edgecolor="darkslategrey",
     linewidth=0.5,
-    alpha=0.5,
-    figsize=(6.5, 6.5),
 )
-pilgrim_paths.plot(column="Object_Typ", marker="x", cmap="viridis", ax=fig)
+
 map_labels = zip(
     zip(pilgrim_paths.centroid.x + 5000, pilgrim_paths.centroid.y - 2500),
     pilgrim_paths["Object_Typ"],
 )
 for xy, lab in map_labels:
-    fig.annotate(text=lab, xy=xy, textcoords="data", rotation=5)
+    ax.annotate(text=lab, xy=xy, textcoords="data", rotation=5)
+
 plt.title("Pilgrim Paths in Ireland")
-plt.text(650000, 505000, "© EuroGeographics; gov.ie")
+plt.text(xmax - 180000, ymin - 10000, "© EuroGeographics; Heritage Council")
 plt.tick_params(labelbottom=False, labelleft=False)
 plt.tight_layout()
 plt.show()
 
-fig = nuts.to_crs(pilgrim_paths.crs).plot(
-    color="navajowhite",
-    edgecolor="darkslategrey",
-    linewidth=0.5,
-    alpha=0.5,
-    figsize=(6.5, 6.5),
-)
-sheela_na_gigs.plot(
-    column="Sheela-na-Gig", marker="*", cmap="tab20b", ax=fig, legend=True
-)
-for legend_handle in fig.get_legend().legendHandles:
-    legend_handle.set_markeredgewidth(0.2)
-    legend_handle.set_markeredgecolor("darkslategrey")
-plt.title("Sheela-na-Gigs in Ireland")
-plt.text(650000, 505000, "© EuroGeographics; gov.ie")
-plt.tick_params(labelbottom=False, labelleft=False)
-plt.tight_layout()
-plt.show()
+# get map bounds in web mercator projection
+CRS = 3857
+xmin, ymin, xmax, ymax = nuts.to_crs(CRS).total_bounds
 
-fig = nuts.to_crs(pilgrim_paths.crs).plot(
-    color="navajowhite",
-    edgecolor="darkslategrey",
-    linewidth=0.5,
-    alpha=0.5,
-    figsize=(6.5, 6.5),
-)
-sheela_na_gigs.plot(
-    column="ITM_Northi",
-    ax=fig,
+# with gridlines, scalebar, and basemap
+plt.figure(figsize=(10, 10))
+ax = plt.axes(projection=ccrs.epsg(CRS))
+
+pilgrim_paths.to_crs(CRS).plot(
+    ax=ax,
+    column="Object_Typ",
+    marker="o",
+    cmap="tab20b",
     legend=True,
-    cmap="viridis",
-    marker=".",
-    legend_kwds={"label": "ITM Northing (m)"},
-)
-plt.title("Sheela-na-Gigs in Ireland")
-plt.text(650000, 505000, "© EuroGeographics; gov.ie")
-plt.tick_params(labelbottom=False, labelleft=False)
-plt.tight_layout()
-plt.show()
-
-fig = nuts.to_crs(pilgrim_paths.crs).plot(
-    color="navajowhite",
     edgecolor="darkslategrey",
     linewidth=0.5,
-    alpha=0.5,
-    figsize=(6.5, 6.5),
 )
-sheela_na_gigs.plot(
-    column="ITM_Eastin",
-    ax=fig,
-    legend=True,
-    cmap="copper",
-    scheme="equalinterval",
-    marker="X",
-    legend_kwds={"title": "ITM Easting (m)", "fmt": "{:.0f}"},
-)
-for legend_handle in fig.get_legend().legendHandles:
-    legend_handle.set_markeredgewidth(0.2)
+
+plt.ylim(ymin - 50000, ymax + 50000)
+plt.xlim(xmin - 50000, xmax + 250000)
+
+for legend_handle in ax.get_legend().legend_handles:
+    legend_handle.set_markeredgewidth(0.5)
     legend_handle.set_markeredgecolor("darkslategrey")
-plt.title("Sheela-na-Gigs in Ireland")
-plt.text(650000, 505000, "© EuroGeographics; gov.ie")
-plt.tick_params(labelbottom=False, labelleft=False)
+
+cx.add_basemap(ax, source=cx.providers.CartoDB.Voyager)
+
+ax.gridlines(
+    draw_labels={"bottom": "x", "left": "y"}, alpha=0.25, color="darkslategrey"
+)
+
+ax.add_artist(
+    ScaleBar(1, box_alpha=0, location="lower right", color="darkslategrey")
+)
+
+plt.title("Pilgrim Paths in Ireland")
+plt.text(xmin - 45000, ymin - 30000, "© Heritage Council")
 plt.tight_layout()
 plt.show()

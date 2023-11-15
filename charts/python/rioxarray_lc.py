@@ -5,106 +5,80 @@
 #
 # Data used:
 #
-# - Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri; Heiskanen, Janne (2021), "Taita Taveta County, Kenya - 2020 Land cover map and reference database", Mendeley Data, V2, doi: [10.17632/xv24ngy2dz.2](https://doi.org/10.17632/xv24ngy2dz.2) - CC-BY-4.0
+# Abera, Temesgen Alemayheu; Vuorinne, Ilja; Munyao, Martha; Pellikka, Petri;
+# Heiskanen, Janne (2021), "Taita Taveta County, Kenya - 2020 Land cover map
+# and reference database", Mendeley Data, V2, doi:
+# [10.17632/xv24ngy2dz.2](https://doi.org/10.17632/xv24ngy2dz.2) - CC-BY-4.0
 
 # import libraries
-import multiprocessing
-import platform
 import os
-from zipfile import ZipFile, BadZipFile
-from datetime import datetime, timezone
-
-# Windows
-if platform.system() == "Windows":
-    import multiprocessing.popen_spawn_win32
-# Linux/OSX
-else:
-    import multiprocessing.popen_spawn_posix
-
-import threading
 import xml.etree.ElementTree as ET
+from datetime import datetime, timezone
+from zipfile import BadZipFile, ZipFile
 
-import requests
-import pandas as pd
+import cartopy.crs as ccrs
+import contextily as cx
+import geopandas as gpd
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 import numpy as np
+import pandas as pd
+import pooch
 import rioxarray as rxr
-from dask.distributed import Client, LocalCluster, Lock
-from dask.utils import SerializableLock
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+from matplotlib_scalebar.scalebar import ScaleBar
+
+# basemap cache directory
+cx.set_cache_dir(os.path.join("data", "basemaps"))
+os.makedirs(os.path.join("data", "basemaps"), exist_ok=True)
 
 print("Last updated:", datetime.now(tz=timezone.utc))
 
-# configure plot styles
-plt.style.use("seaborn-whitegrid")
-plt.rcParams["font.family"] = "Source Sans 3"
-plt.rcParams["figure.dpi"] = 150
-plt.rcParams["axes.grid"] = False
-plt.rcParams["text.color"] = "darkslategrey"
-plt.rcParams["axes.labelcolor"] = "darkslategrey"
-plt.rcParams["xtick.labelcolor"] = "darkslategrey"
-plt.rcParams["ytick.labelcolor"] = "darkslategrey"
-plt.rcParams["figure.titleweight"] = "semibold"
-plt.rcParams["axes.titleweight"] = "semibold"
-plt.rcParams["figure.titlesize"] = "13"
-plt.rcParams["axes.titlesize"] = "12"
-plt.rcParams["axes.labelsize"] = "10"
-
-# define data directories
-DATA_DIR = os.path.join("data", "kenya_land_cover")
-ZIP_FILE = DATA_DIR + ".zip"
-
-# download data
+KNOWN_HASH = None
 URL = (
-    "https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/"
-    + "xv24ngy2dz-2.zip"
+    "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/"
+    "xv24ngy2dz-2.zip"
 )
-r = requests.get(URL, stream=True)
+FILE_NAME = "kenya_land_cover.zip"
+SUB_DIR = os.path.join("data", "kenya_land_cover")
+DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
+os.makedirs(SUB_DIR, exist_ok=True)
 
-os.makedirs("data", exist_ok=True)
+# download data if necessary
+if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
+    pooch.retrieve(
+        url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
+    )
 
-if r.status_code == 200:
-    with open(ZIP_FILE, "wb") as filedl:
-        for chunk in r.iter_content(chunk_size=1048676):
-            filedl.write(chunk)
-    print("Data downloaded:", datetime.now(tz=timezone.utc))
-else:
-    print("\nStatus code:", r.status_code)
+    with open(
+        os.path.join(SUB_DIR, f"{FILE_NAME[:-4]}.txt"), "w", encoding="utf-8"
+    ) as outfile:
+        outfile.write(
+            f"Data downloaded on: {datetime.now(tz=timezone.utc)}\n"
+            f"Download URL: {URL}"
+        )
+
+with open(f"{DATA_FILE[:-4]}.txt") as f:
+    print(f.read())
 
 # list of files in the ZIP archive
-ZipFile(ZIP_FILE).namelist()
+ZipFile(DATA_FILE).namelist()
 
 # extract the archive
 try:
-    z = ZipFile(ZIP_FILE)
-    z.extractall(DATA_DIR)
+    z = ZipFile(DATA_FILE)
+    z.extractall(SUB_DIR)
 except BadZipFile:
-    print("There were issues with the file", ZIP_FILE)
+    print("There were issues with the file", DATA_FILE)
 
 # define paths to the TIF and QML files
-for i in ZipFile(ZIP_FILE).namelist():
+for i in ZipFile(DATA_FILE).namelist():
     if i.endswith(".tif"):
-        raster_file = os.path.join(DATA_DIR, i)
+        raster_file = os.path.join(SUB_DIR, i)
     elif i.endswith(".qml"):
-        style_file = os.path.join(DATA_DIR, i)
+        style_file = os.path.join(SUB_DIR, i)
 
-# read the raster
-# use Dask for parallel computing
-# https://corteva.github.io/rioxarray/stable/examples/dask_read_write.html
-with LocalCluster() as cluster, Client(cluster) as client:
-    landcover = rxr.open_rasterio(
-        raster_file,
-        chunks=True,
-        cache=False,
-        masked=True,
-        lock=False,
-        # lock=Lock("rio-read", client=client)  # when too many file handles open
-    )
-    landcover.rio.to_raster(
-        os.path.join(DATA_DIR, "dask_multiworker.tif"),
-        tiled=True,
-        lock=Lock("rio", client=client),
-    )
+landcover = rxr.open_rasterio(raster_file, chunks=300, masked=True)
 
 landcover
 
@@ -183,6 +157,7 @@ plt.title(
 )
 plt.ylabel("")
 plt.xlabel("Land cover (%)")
+plt.tight_layout()
 plt.show()
 
 # convert values to integer and sort
@@ -201,6 +176,8 @@ colours
 col_discrete = ListedColormap(list(uniquevals["color"]))
 col_discrete
 
+xmin, ymin, xmax, ymax = landcover.rio.bounds()
+
 # create a dummy plot for the discrete colour map as the legend
 img = plt.figure(figsize=(15, 15))
 img = plt.imshow(np.array([[0, len(uniquevals)]]), cmap=col_discrete)
@@ -214,12 +191,89 @@ cbar.ax.set_yticklabels(list(uniquevals["label"]))
 landcover.plot(add_colorbar=False, cmap=colours)
 
 plt.axis("equal")
-plt.xlim(landcover.rio.bounds()[0] - 0.01, landcover.rio.bounds()[2] + 0.01)
-plt.ylim(landcover.rio.bounds()[1] - 0.01, landcover.rio.bounds()[3] + 0.01)
+plt.xlim(xmin - 0.01, xmax + 0.01)
+plt.ylim(ymin - 0.01, ymax + 0.01)
 
-plt.title("Taita Taveta County, Kenya - 2020 Land cover map")
-plt.text(38.75, -4.4, "Data: © Abera et al. 2021 (CC-BY-4.0)")
-plt.xlabel("Longitude")
-plt.ylabel("Latitude")
+plt.title(
+    "Taita Taveta County, Kenya - 2020 Land cover map. "
+    "Data: © Abera et al. 2021 (CC-BY-4.0)."
+)
+
+plt.show()
+
+# clip data into a smaller subset to demonstrate further plotting capabilities
+# use web mercator projection
+CRS = 3857
+
+# 20k meter buffer at the centre
+mask = gpd.GeoSeries(
+    gpd.points_from_xy(
+        [xmin + (xmax - xmin) / 2],
+        [ymin + (ymax - ymin) / 2],
+        crs=landcover.rio.crs,
+    )
+    .to_crs(CRS)
+    .buffer(20000)
+    .to_crs(landcover.rio.crs)
+)
+
+mask
+
+mask.total_bounds
+
+mask.crs
+
+landcover.rio.clip(mask)
+
+# use legend handles for better legends
+fig, ax = plt.subplots(figsize=(10, 10))
+landcover.rio.clip(mask).plot(add_colorbar=False, cmap=colours, ax=ax)
+
+legend_handles = []
+for color, label in zip(list(uniquevals["color"]), list(uniquevals["label"])):
+    legend_handles.append(mpatches.Patch(facecolor=color, label=label))
+
+ax.legend(handles=legend_handles, loc="lower right", bbox_to_anchor=(1.21, 0))
+
+plt.title(
+    "Taita Taveta County, Kenya - 2020 Land cover map. "
+    "Data: © Abera et al. 2021 (CC-BY-4.0)."
+)
+
+plt.show()
+
+xmin, ymin, xmax, ymax = landcover.rio.reproject(CRS).rio.bounds()
+
+# with better legends, basemap, scalebar, and gridlines
+plt.figure(figsize=(10, 10))
+ax = plt.axes(projection=ccrs.epsg(CRS))
+landcover.rio.clip(mask).rio.reproject(CRS).plot(
+    add_colorbar=False, cmap=colours, ax=ax
+)
+
+plt.ylim(ymin, ymax)
+plt.xlim(xmin, xmax)
+
+cx.add_basemap(ax, source=cx.providers.CartoDB.VoyagerNoLabels)
+cx.add_basemap(ax, source=cx.providers.CartoDB.VoyagerOnlyLabels)
+
+legend_handles = []
+for color, label in zip(list(uniquevals["color"]), list(uniquevals["label"])):
+    legend_handles.append(mpatches.Patch(facecolor=color, label=label))
+
+ax.legend(handles=legend_handles)
+
+ax.gridlines(
+    draw_labels={"bottom": "x", "left": "y"}, alpha=0.25, color="darkslategrey"
+)
+
+ax.add_artist(
+    ScaleBar(1, box_alpha=0, location="lower right", color="darkslategrey")
+)
+
+plt.title(
+    "Taita Taveta County, Kenya - 2020 Land cover map. "
+    "Data: © Abera et al. 2021 (CC-BY-4.0)."
+)
 
 plt.show()

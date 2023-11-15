@@ -2,6 +2,7 @@
 .ipynb_checkpoints/
 .vscode/
 *.qgz
+env/
 draft/
 archive/
 data/
