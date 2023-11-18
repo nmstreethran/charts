@@ -51,11 +51,15 @@ if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
             f"Download URL: {URL}"
         )
 
+with open(f"{DATA_FILE[:-4]}.txt") as f:
+    print(f.read())
+
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
 
 pilgrim_paths = gpd.read_file(
-    f"zip://{DATA_FILE}!Pilgrim Paths Shapefiles/PilgrimPaths.shp"
+    f"zip://{DATA_FILE}!"
+    + [x for x in ZipFile(DATA_FILE).namelist() if x.endswith(".shp")][0]
 )
 
 # view data
@@ -89,6 +93,9 @@ if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
             f"Data downloaded on: {datetime.now(tz=timezone.utc)}\n"
             f"Download URL: {URL}"
         )
+
+with open(f"{DATA_FILE[:-8]}.txt") as f:
+    print(f.read())
 
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()

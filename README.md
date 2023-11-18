@@ -1,40 +1,23 @@
 # Charts
 
-## Interactive charts
-
-### Google Charts
-
-[Google's interactive visualisation library](https://developers.google.com/chart)
-
 &nbsp; | Source | Output
 -- | -- | --
+***Interactive charts***
+**Google Charts** | [**Google's interactive visualisation library**](https://developers.google.com/chart)
 Area chart | [![View HTML](badges/html.svg)](charts/google/areachart.html) [![View JavaScript](badges/javascript.svg)](charts/google/areachart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/yt7ab0Lo/)
 Bar chart | [![View HTML](badges/html.svg)](charts/google/barchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/barchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/qxcpz345/)
 Column chart | [![View HTML](badges/html.svg)](charts/google/columnchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/columnchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/df0bmjt1/)
 Gantt chart | [![View HTML](badges/html.svg)](charts/google/ganttchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/ganttchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/s2kye3md/)
 Pie chart | [![View HTML](badges/html.svg)](charts/google/piechart.html) [![View JavaScript](badges/javascript.svg)](charts/google/piechart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/nm5pgksj/)
-
-### Bokeh
-
-&nbsp; | Source | Output
--- | -- | --
+**Bokeh**
 Simple polygons | [![View Python script](badges/python.svg)](charts/python/bokeh_polygon.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
 Points | [![View Python script](badges/python.svg)](charts/python/bokeh_points.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
-
-## Static plots
-
-### Matplotlib
-
-&nbsp; | Source | Output
--- | -- | --
+***Static plots***
+**Matplotlib**
 Raster visualisation with rioxarray - digital terrain model | [![View Python script](badges/python.svg)](charts/python/rioxarray.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/rioxarray.ipynb)
 Raster visualisation with rioxarray - land cover map | [![View Python script](badges/python.svg)](charts/python/rioxarray_lc.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/rioxarray_lc.ipynb)
 Vector visualisation with GeoPandas | [![View Python script](badges/python.svg)](charts/python/geopandas.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/geopandas.ipynb)
-
-### R
-
-&nbsp; | Source | Output
--- | -- | --
+**R**
 Lattice levelplots | [![View R script](badges/r.svg)](charts/r/lattice_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/r/lattice.ipynb)
 Raster visualisation with rasterVis | [![View R script](badges/r.svg)](charts/r/rastervis_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/r/rastervis.ipynb)
 Simple vector feature visualisation with sf | [![View R script](badges/r.svg)](charts/r/sf_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/r/sf.ipynb)
@@ -47,10 +30,7 @@ See [maps](maps).
 
 ### Python
 
-```sh
-conda create --channel conda-forge --name py-env python=3 geopandas matplotlib rioxarray jupyterlab jupyter_bokeh
-conda activate py-env
-```
+See [requirements.txt](requirements.txt)
 
 ### R
 
