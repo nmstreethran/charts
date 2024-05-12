@@ -10,7 +10,6 @@
 
 # import libraries
 import os
-from datetime import datetime, timezone
 from zipfile import BadZipFile, ZipFile
 
 import cartopy.crs as ccrs
@@ -43,17 +42,6 @@ if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
         url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
     )
 
-    with open(
-        os.path.join(SUB_DIR, f"{FILE_NAME[:-4]}.txt"), "w", encoding="utf-8"
-    ) as outfile:
-        outfile.write(
-            f"Data downloaded on: {datetime.now(tz=timezone.utc)}\n"
-            f"Download URL: {URL}"
-        )
-
-with open(f"{DATA_FILE[:-4]}.txt") as f:
-    print(f.read())
-
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
 
@@ -85,17 +73,6 @@ if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
     pooch.retrieve(
         url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
     )
-
-    with open(
-        os.path.join(SUB_DIR, f"{FILE_NAME[:-8]}.txt"), "w", encoding="utf-8"
-    ) as outfile:
-        outfile.write(
-            f"Data downloaded on: {datetime.now(tz=timezone.utc)}\n"
-            f"Download URL: {URL}"
-        )
-
-with open(f"{DATA_FILE[:-8]}.txt") as f:
-    print(f.read())
 
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()

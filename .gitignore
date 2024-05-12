@@ -1,8 +1,8 @@
 .empty/
 .ipynb_checkpoints/
-.vscode/
 *.qgz
 env/
+.venv/
 draft/
 archive/
 data/

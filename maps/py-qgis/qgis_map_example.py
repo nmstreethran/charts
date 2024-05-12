@@ -1,15 +1,11 @@
 # import libraries
 import os
 from glob import glob
-from qgis.core import (
-    QgsApplication,
-    QgsProject,
-    QgsRasterLayer,
-    QgsVectorLayer,
-    QgsProcessingFeedback
-)
-from qgis import processing
+
 from processing.core.Processing import Processing
+from qgis import processing
+from qgis.core import (QgsApplication, QgsProcessingFeedback, QgsProject,
+                       QgsRasterLayer, QgsVectorLayer)
 
 # create a reference to the QgsApplication
 # setting the second argument to False disables the GUI
@@ -71,10 +67,7 @@ add_vector_layer(
 
 # set raster style using QML file
 for raster in rlist:
-    params = {
-        "INPUT": raster,
-        "STYLE": "py-qgis/colombia_relief_colours.qml"
-    }
+    params = {"INPUT": raster, "STYLE": "py-qgis/colombia_relief_colours.qml"}
     processing.run("native:setlayerstyle", params, feedback=feedback)
 
 # save the project

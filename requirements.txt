@@ -1,7 +1,10 @@
-black
+dask[distributed]
+rioxarray
+scipy
+black[jupyter]
+bokeh
 cartopy
 contextily
-dask[distributed]
 flake8
 geopandas
 jupyterlab
@@ -9,5 +12,3 @@ matplotlib_scalebar
 mapclassify
 pooch
 pylint
-rioxarray
-scipy

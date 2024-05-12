@@ -10,8 +10,8 @@ Column chart | [![View HTML](badges/html.svg)](charts/google/columnchart.html) [
 Gantt chart | [![View HTML](badges/html.svg)](charts/google/ganttchart.html) [![View JavaScript](badges/javascript.svg)](charts/google/ganttchart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/s2kye3md/)
 Pie chart | [![View HTML](badges/html.svg)](charts/google/piechart.html) [![View JavaScript](badges/javascript.svg)](charts/google/piechart.js) | [![View output on JSFiddle](badges/jsfiddle.svg)](https://jsfiddle.net/nithiya/nm5pgksj/)
 **Bokeh**
-Simple polygons | [![View Python script](badges/python.svg)](charts/python/bokeh_polygon.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_polygon.ipynb)
-Points | [![View Python script](badges/python.svg)](charts/python/bokeh_points.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/bokeh_points.ipynb)
+Simple polygons | [![View Python script](badges/python.svg)](charts/python/bokeh_polygon.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/bokeh_polygon.ipynb)
+Points | [![View Python script](badges/python.svg)](charts/python/bokeh_points.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/bokeh_points.ipynb)
 ***Static plots***
 **Matplotlib**
 Raster visualisation with rioxarray - digital terrain model | [![View Python script](badges/python.svg)](charts/python/rioxarray.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/rioxarray.ipynb)

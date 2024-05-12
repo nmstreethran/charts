@@ -4,30 +4,43 @@ See: https://nithiya.gitlab.io/post/pollen-concentration-maps-qgis/
 
 """
 
+import geopandas as gpd
 # import libraries
 import pandas as pd
-import geopandas as gpd
 
 # read data
 pollen = pd.read_csv("data/qPCR_copy_number_abundance_data_aerial_DNA.csv")
 
 # create well known text from coordinates
 pollen["wkt"] = (
-    "POINT (" + pollen["Long"].astype(str) + " " +
-    pollen["Lat"].astype(str) + ")"
+    "POINT ("
+    + pollen["Long"].astype(str)
+    + " "
+    + pollen["Lat"].astype(str)
+    + ")"
 )
 
 # drop cells with no value
 pollen = pollen.dropna(subset=["Lat", "Long", "MaxPoaceaeConc", "year-month"])
 
 # use full pollen monitoring site name
-pollen = pollen.replace({
-    "EXE": "Exeter", "EastR": "East Riding", "ESK": "Eskdalemuir",
-    "LEIC": "Leicester", "CAR": "Cardiff", "IOW": "Isle of Wight",
-    "IPS": "Ipswich", "BNG": "Bangor", "WOR": "Worcester",
-    "KCL": "King's College London", "YORK": "York", "ING": "Invergowrie",
-    "BEL": "Belfast"
-})
+pollen = pollen.replace(
+    {
+        "EXE": "Exeter",
+        "EastR": "East Riding",
+        "ESK": "Eskdalemuir",
+        "LEIC": "Leicester",
+        "CAR": "Cardiff",
+        "IOW": "Isle of Wight",
+        "IPS": "Ipswich",
+        "BNG": "Bangor",
+        "WOR": "Worcester",
+        "KCL": "King's College London",
+        "YORK": "York",
+        "ING": "Invergowrie",
+        "BEL": "Belfast",
+    }
+)
 
 # create a geo data frame
 pollen = gpd.GeoDataFrame(
