@@ -17,6 +17,7 @@ Points | [![View Python script](badges/python.svg)](charts/python/bokeh_points.p
 Raster visualisation with rioxarray - digital terrain model | [![View Python script](badges/python.svg)](charts/python/rioxarray.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/rioxarray.ipynb)
 Raster visualisation with rioxarray - land cover map | [![View Python script](badges/python.svg)](charts/python/rioxarray_lc.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/rioxarray_lc.ipynb)
 Vector visualisation with GeoPandas | [![View Python script](badges/python.svg)](charts/python/geopandas.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/geopandas.ipynb)
+Vector polygon visualisation with GeoPandas | [![View Python script](badges/python.svg)](charts/python/geopandas_polygon.py) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/python/geopandas_polygon.ipynb)
 **R**
 Lattice levelplots | [![View R script](badges/r.svg)](charts/r/lattice_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/r/lattice.ipynb)
 Raster visualisation with rasterVis | [![View R script](badges/r.svg)](charts/r/rastervis_plot.r) | [![View Jupyter Notebook](badges/jupyter.svg)](https://nbviewer.org/github/nmstreethran/charts/blob/main/docs/r/rastervis.ipynb)
