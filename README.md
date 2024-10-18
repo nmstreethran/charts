@@ -32,6 +32,13 @@ See [maps](maps).
 
 See [requirements.txt](requirements.txt)
 
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt
+```
+
 ### R
 
 ```sh
