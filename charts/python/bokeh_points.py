@@ -5,6 +5,9 @@
 #
 # Data used: Pilgrim Paths in Ireland (<https://data.gov.ie/dataset/pilgrim-paths>)
 
+# In[ ]:
+
+
 # import libraries
 import os
 from zipfile import ZipFile
@@ -17,8 +20,15 @@ from bokeh.models import CategoricalColorMapper, GeoJSONDataSource
 from bokeh.palettes import Category20b
 from bokeh.plotting import figure, show
 
+# In[ ]:
+
+
 # set inline plots
 output_notebook()
+
+
+# In[ ]:
+
 
 # pilgrims paths dataset
 URL = (
@@ -29,6 +39,10 @@ FILE_NAME = "Pilgrim-Paths-Shapefiles.zip"
 SUB_DIR = os.path.join("data", "Pilgrim-Paths")
 DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
 
+
+# In[ ]:
+
+
 # download data if necessary
 if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
     os.makedirs(SUB_DIR, exist_ok=True)
@@ -36,8 +50,16 @@ if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
         url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
     )
 
+
+# In[ ]:
+
+
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
+
+
+# In[ ]:
+
 
 # read shapefile data
 pilgrim_paths = gpd.read_file(
@@ -45,25 +67,57 @@ pilgrim_paths = gpd.read_file(
     + [x for x in ZipFile(DATA_FILE).namelist() if x.endswith(".shp")][0]
 )
 
+
+# In[ ]:
+
+
 # view data
 pilgrim_paths.head()
 
+
+# In[ ]:
+
+
 pilgrim_paths.shape
+
+
+# In[ ]:
+
 
 list(pilgrim_paths)
 
+
+# In[ ]:
+
+
 pilgrim_paths.crs
+
+
+# In[ ]:
+
 
 # reproject to web mercator
 data = pilgrim_paths.to_crs(3857)
 
+
+# In[ ]:
+
+
 # convert data source to GeoJSON
 geo_source = GeoJSONDataSource(geojson=data.to_json())
+
+
+# In[ ]:
+
 
 # generate unique colours for each point
 const = list(set(data["Object_Typ"]))
 palette = Category20b[len(const)]
 color_map = CategoricalColorMapper(factors=const, palette=palette)
+
+
+# In[ ]:
+
 
 # define title and tooltips
 TITLE = "Pilgrim Paths in Ireland. © Heritage Council."
@@ -76,6 +130,10 @@ TOOLTIPS = [
     ("Length", "@Length_1"),
     ("Difficulty", "@Level_of_D"),
 ]
+
+
+# In[ ]:
+
 
 # configure plot
 p = figure(

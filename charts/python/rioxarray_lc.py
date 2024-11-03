@@ -10,6 +10,9 @@
 # and reference database", Mendeley Data, V2, doi:
 # [10.17632/xv24ngy2dz.2](https://doi.org/10.17632/xv24ngy2dz.2) - CC-BY-4.0
 
+# In[ ]:
+
+
 # import libraries
 import os
 import xml.etree.ElementTree as ET
@@ -28,11 +31,21 @@ import rioxarray as rxr
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from matplotlib_scalebar.scalebar import ScaleBar
 
+# In[ ]:
+
+
 # basemap cache directory
 cx.set_cache_dir(os.path.join("data", "basemaps"))
-os.makedirs(os.path.join("data", "basemaps"), exist_ok=True)
+
+
+# In[ ]:
+
 
 print("Last updated:", datetime.now(tz=timezone.utc))
+
+
+# In[ ]:
+
 
 KNOWN_HASH = None
 URL = (
@@ -43,6 +56,10 @@ FILE_NAME = "kenya_land_cover.zip"
 SUB_DIR = os.path.join("data", "kenya_land_cover")
 DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
 os.makedirs(SUB_DIR, exist_ok=True)
+
+
+# In[ ]:
+
 
 # download data if necessary
 if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
@@ -58,11 +75,23 @@ if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
             f"Download URL: {URL}"
         )
 
+
+# In[ ]:
+
+
 with open(f"{DATA_FILE[:-4]}.txt") as f:
     print(f.read())
 
+
+# In[ ]:
+
+
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
+
+
+# In[ ]:
+
 
 # extract the archive
 try:
@@ -71,6 +100,10 @@ try:
 except BadZipFile:
     print("There were issues with the file", DATA_FILE)
 
+
+# In[ ]:
+
+
 # define paths to the TIF and QML files
 for i in ZipFile(DATA_FILE).namelist():
     if i.endswith(".tif"):
@@ -78,15 +111,39 @@ for i in ZipFile(DATA_FILE).namelist():
     elif i.endswith(".qml"):
         style_file = os.path.join(SUB_DIR, i)
 
+
+# In[ ]:
+
+
 landcover = rxr.open_rasterio(raster_file, chunks=300, masked=True)
+
+
+# In[ ]:
+
 
 landcover
 
+
+# In[ ]:
+
+
 landcover.rio.resolution()
+
+
+# In[ ]:
+
 
 landcover.rio.bounds()
 
+
+# In[ ]:
+
+
 landcover.rio.crs
+
+
+# In[ ]:
+
 
 # get unique value count for the raster
 uniquevals = pd.DataFrame(np.unique(landcover, return_counts=True)).transpose()
@@ -100,7 +157,15 @@ uniquevals.dropna(inplace=True)
 # convert value column to string (this is required for merging later)
 uniquevals["value"] = uniquevals["value"].astype(int).astype(str)
 
+
+# In[ ]:
+
+
 uniquevals
+
+
+# In[ ]:
+
 
 # read the QGIS style file containing the legend entries
 tree = ET.parse(style_file)
@@ -122,7 +187,15 @@ legend.drop(columns="alpha", inplace=True)
 # convert value column to string (this is required for merging later)
 legend["value"] = legend["value"].astype(str)
 
+
+# In[ ]:
+
+
 legend
+
+
+# In[ ]:
+
 
 # merge unique values data frame with legend
 uniquevals = uniquevals.merge(legend, on="value")
@@ -136,7 +209,15 @@ uniquevals["percentage"] = uniquevals["percentage"].astype(int)
 # sort by count
 uniquevals.sort_values("count", ascending=False, inplace=True)
 
+
+# In[ ]:
+
+
 uniquevals
+
+
+# In[ ]:
+
 
 # plot the major land cover types, i.e. percentage > 0
 mask = uniquevals["percentage"] > 0
@@ -160,9 +241,17 @@ plt.xlabel("Land cover (%)")
 plt.tight_layout()
 plt.show()
 
+
+# In[ ]:
+
+
 # convert values to integer and sort
 uniquevals["value"] = uniquevals["value"].astype(int)
 uniquevals.sort_values("value", inplace=True)
+
+
+# In[ ]:
+
 
 # create a continuous colourmap for the plot
 colours = list(uniquevals["color"])
@@ -172,11 +261,23 @@ nodes = (nodes - min(nodes)) / (max(nodes) - min(nodes))
 colours = LinearSegmentedColormap.from_list("LCM", list(zip(nodes, colours)))
 colours
 
+
+# In[ ]:
+
+
 # create a discrete colourmap for the legend
 col_discrete = ListedColormap(list(uniquevals["color"]))
 col_discrete
 
+
+# In[ ]:
+
+
 xmin, ymin, xmax, ymax = landcover.rio.bounds()
+
+
+# In[ ]:
+
 
 # create a dummy plot for the discrete colour map as the legend
 img = plt.figure(figsize=(15, 15))
@@ -201,9 +302,17 @@ plt.title(
 
 plt.show()
 
+
+# In[ ]:
+
+
 # clip data into a smaller subset to demonstrate further plotting capabilities
 # use web mercator projection
 CRS = 3857
+
+
+# In[ ]:
+
 
 # 20k meter buffer at the centre
 mask = gpd.GeoSeries(
@@ -217,13 +326,33 @@ mask = gpd.GeoSeries(
     .to_crs(landcover.rio.crs)
 )
 
+
+# In[ ]:
+
+
 mask
+
+
+# In[ ]:
+
 
 mask.total_bounds
 
+
+# In[ ]:
+
+
 mask.crs
 
+
+# In[ ]:
+
+
 landcover.rio.clip(mask)
+
+
+# In[ ]:
+
 
 # use legend handles for better legends
 fig, ax = plt.subplots(figsize=(10, 10))
@@ -242,7 +371,15 @@ plt.title(
 
 plt.show()
 
+
+# In[ ]:
+
+
 xmin, ymin, xmax, ymax = landcover.rio.reproject(CRS).rio.bounds()
+
+
+# In[ ]:
+
 
 # with better legends, basemap, scalebar, and gridlines
 plt.figure(figsize=(10, 10))

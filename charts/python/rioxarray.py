@@ -5,15 +5,25 @@
 #
 # Data used: OS Terrain® 50 (<https://osdatahub.os.uk/downloads/open/Terrain50>)
 
+# In[ ]:
+
+
 # change directory to root if using JupyterLab
 import os
 
 os.chdir("..")
 
+
+# In[ ]:
+
+
 # import libraries
 import matplotlib.pyplot as plt
 import rioxarray as rxr
 from rioxarray.merge import merge_arrays
+
+# In[ ]:
+
 
 # configure plot styles
 plt.style.use("Solarize_Light2")
@@ -27,6 +37,10 @@ plt.rcParams["ytick.labelcolor"] = "darkslategrey"
 plt.rcParams["axes.titlesize"] = "12"
 plt.rcParams["axes.labelsize"] = "10"
 plt.rcParams["axes.titleweight"] = "semibold"
+
+
+# In[ ]:
+
 
 # read the digital terrain model
 # OS Terrain 50
@@ -43,8 +57,16 @@ for ras in rasters:
 
 dtm = merge_arrays(arrays)
 
+
+# In[ ]:
+
+
 # view the DTM
 dtm
+
+
+# In[ ]:
+
 
 # plot the DTM
 dtm.squeeze().plot.imshow(
@@ -67,6 +89,10 @@ plt.axis("equal")
 
 plt.show()
 
+
+# In[ ]:
+
+
 # plot contours
 CS = dtm.squeeze().plot.contour(
     cmap="inferno", linewidths=0.5, add_colorbar=False, figsize=(7, 7)
@@ -84,6 +110,10 @@ plt.ylabel("Northing (m)")
 plt.axis("equal")
 
 plt.show()
+
+
+# In[ ]:
+
 
 # contour overlay
 dtm.squeeze().plot.imshow(

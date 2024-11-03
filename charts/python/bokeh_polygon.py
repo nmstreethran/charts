@@ -5,6 +5,9 @@
 #
 # Data used: NUTS (<https://ec.europa.eu/eurostat/web/nuts/background>)
 
+# In[ ]:
+
+
 # import libraries
 import os
 from zipfile import BadZipFile, ZipFile
@@ -17,8 +20,15 @@ from bokeh.models import CategoricalColorMapper, GeoJSONDataSource
 from bokeh.palettes import inferno
 from bokeh.plotting import figure, show
 
+# In[ ]:
+
+
 # set inline plots
 output_notebook()
+
+
+# In[ ]:
+
 
 # NUTS data
 URL = (
@@ -30,14 +40,26 @@ SUB_DIR = os.path.join("data", "NUTS")
 DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
 os.makedirs(SUB_DIR, exist_ok=True)
 
+
+# In[ ]:
+
+
 # download data if necessary
 if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
     pooch.retrieve(
         url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
     )
 
+
+# In[ ]:
+
+
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
+
+
+# In[ ]:
+
 
 # extract the archive
 try:
@@ -46,25 +68,61 @@ try:
 except BadZipFile:
     print("There were issues with the file", DATA_FILE)
 
+
+# In[ ]:
+
+
 DATA_FILE = os.path.join(SUB_DIR, "NUTS_RG_01M_2021_3857_LEVL_0.shp.zip")
+
+
+# In[ ]:
+
 
 ZipFile(DATA_FILE).namelist()
 
+
+# In[ ]:
+
+
 nuts = gpd.read_file(f"zip://{DATA_FILE}!NUTS_RG_01M_2021_3857_LEVL_0.shp")
+
+
+# In[ ]:
+
 
 nuts.head()
 
+
+# In[ ]:
+
+
 nuts.shape
+
+
+# In[ ]:
+
 
 nuts.crs
 
+
+# In[ ]:
+
+
 # convert data source to GeoJSON
 geo_source = GeoJSONDataSource(geojson=nuts.to_json())
+
+
+# In[ ]:
+
 
 # generate unique colours for each point
 const = list(set(nuts["NUTS_ID"]))
 palette = inferno(len(const))
 color_map = CategoricalColorMapper(factors=const, palette=palette)
+
+
+# In[ ]:
+
 
 # define title and tooltips
 TITLE = "NUTS Level 0 regions. © EuroGeographics."
@@ -75,6 +133,10 @@ TOOLTIPS = [
     ("NUTS ID", "@NUTS_ID"),
     ("Country", "@CNTR_CODE"),
 ]
+
+
+# In[ ]:
+
 
 # configure plot
 p = figure(

@@ -8,7 +8,9 @@
 # - <https://data.gov.ie/dataset/pilgrim-paths>
 # - <https://ec.europa.eu/eurostat/web/nuts/background>
 
-# import libraries
+# In[ ]:
+
+
 import os
 from zipfile import BadZipFile, ZipFile
 
@@ -19,13 +21,19 @@ import matplotlib.pyplot as plt
 import pooch
 from matplotlib_scalebar.scalebar import ScaleBar
 
+# In[ ]:
+
+
 # basemap cache directory
 cx.set_cache_dir(os.path.join("data", "basemaps"))
-os.makedirs(os.path.join("data", "basemaps"), exist_ok=True)
+
 
 # ## Data
 
 # ### Pilgrim Paths
+
+# In[ ]:
+
 
 URL = (
     "http://www.heritagecouncil.ie/content/files/Pilgrim-Paths-Shapefiles.zip"
@@ -36,28 +44,56 @@ SUB_DIR = os.path.join("data", "Pilgrim-Paths")
 DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
 os.makedirs(SUB_DIR, exist_ok=True)
 
+
+# In[ ]:
+
+
 # download data if necessary
 if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
     pooch.retrieve(
         url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
     )
 
+
+# In[ ]:
+
+
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
+
+
+# In[ ]:
+
 
 pilgrim_paths = gpd.read_file(
     f"zip://{DATA_FILE}!"
     + [x for x in ZipFile(DATA_FILE).namelist() if x.endswith(".shp")][0]
 )
 
+
+# In[ ]:
+
+
 # view data
 pilgrim_paths.head()
 
+
+# In[ ]:
+
+
 list(pilgrim_paths)
+
+
+# In[ ]:
+
 
 pilgrim_paths.crs
 
+
 # ### NUTS boundaries
+
+# In[ ]:
+
 
 URL = (
     "https://gisco-services.ec.europa.eu/distribution/v2/nuts/download/"
@@ -68,14 +104,26 @@ SUB_DIR = os.path.join("data", "NUTS")
 DATA_FILE = os.path.join(SUB_DIR, FILE_NAME)
 os.makedirs(SUB_DIR, exist_ok=True)
 
+
+# In[ ]:
+
+
 # download data if necessary
 if not os.path.isfile(os.path.join(SUB_DIR, FILE_NAME)):
     pooch.retrieve(
         url=URL, known_hash=KNOWN_HASH, fname=FILE_NAME, path=SUB_DIR
     )
 
+
+# In[ ]:
+
+
 # list of files in the ZIP archive
 ZipFile(DATA_FILE).namelist()
+
+
+# In[ ]:
+
 
 # extract the archive
 try:
@@ -84,25 +132,61 @@ try:
 except BadZipFile:
     print("There were issues with the file", DATA_FILE)
 
+
+# In[ ]:
+
+
 DATA_FILE = os.path.join(SUB_DIR, "NUTS_RG_01M_2021_4326_LEVL_1.shp.zip")
+
+
+# In[ ]:
+
 
 ZipFile(DATA_FILE).namelist()
 
+
+# In[ ]:
+
+
 nuts = gpd.read_file(f"zip://{DATA_FILE}!NUTS_RG_01M_2021_4326_LEVL_1.shp")
 
+
+# In[ ]:
+
+
 nuts.head()
+
+
+# In[ ]:
+
 
 # filter for Ireland
 nuts = nuts[nuts["NUTS_ID"].isin(["IE0", "UKN"])]
 
+
+# In[ ]:
+
+
 nuts
+
+
+# In[ ]:
+
 
 nuts.crs
 
+
 # ## Plots
+
+# In[ ]:
+
 
 # get map bounds
 xmin, ymin, xmax, ymax = nuts.to_crs(pilgrim_paths.crs).total_bounds
+
+
+# In[ ]:
+
 
 ax = (
     nuts.dissolve()
@@ -136,6 +220,10 @@ plt.text(xmax - 180000, ymin - 10000, "© EuroGeographics; Heritage Council")
 plt.tick_params(labelbottom=False, labelleft=False)
 plt.tight_layout()
 plt.show()
+
+
+# In[ ]:
+
 
 # label directly on plot
 ax = (
@@ -172,9 +260,17 @@ plt.tick_params(labelbottom=False, labelleft=False)
 plt.tight_layout()
 plt.show()
 
+
+# In[ ]:
+
+
 # get map bounds in web mercator projection
 CRS = 3857
 xmin, ymin, xmax, ymax = nuts.to_crs(CRS).total_bounds
+
+
+# In[ ]:
+
 
 # with gridlines, scalebar, and basemap
 plt.figure(figsize=(10, 10))
