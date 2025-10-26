@@ -1,14 +1,12 @@
-black[jupyter]
 bokeh
 cartopy
 contextily
 dask[distributed]
-flake8
 geopandas
 jupyterlab
 mapclassify
 matplotlib_scalebar
 pooch
-pylint
 rioxarray
+ruff
 scipy
